@@ -53,6 +53,16 @@ export const STEPS = [
   { n: '04', title: 'Implementamos', text: 'Desplegamos la solución y acompañamos su puesta en marcha.' },
 ]
 
+export const MISSION = 'Ayudar a empresas en Chile a simplificar su operación con software y automatización, partiendo siempre por entender su negocio.'
+export const VISION = 'Ser la consultora a la que una empresa acude cuando necesita una solución tecnológica clara, bien definida y que pueda usar y mantener.'
+
+export const PRINCIPLES = [
+  { icon: 'i-repeat', title: 'Entregas ágiles', text: 'Avanzamos por etapas y validamos contigo en cada una, para llegar pronto a una solución que funcione.' },
+  { icon: 'i-target', title: 'Cotización a tu medida', text: 'Adaptamos la propuesta al alcance, las integraciones y las condiciones de cada proyecto.' },
+  { icon: 'i-doc', title: 'Documentación clara', text: 'Cada entrega incluye la documentación técnica y de uso que tu equipo necesita.' },
+  { icon: 'i-handshake', title: 'Comunicación directa', text: 'Hablas con quien diseña y desarrolla tu solución, sin intermediarios.' },
+]
+
 export const FAQ = [
   { q: '¿Cómo se define el presupuesto?', a: 'Evaluamos el alcance, las integraciones y la complejidad del proyecto para preparar una propuesta con entregables y condiciones claras.' },
   { q: '¿Pueden integrar mis herramientas actuales?', a: 'Revisamos las APIs, permisos y posibilidades de integración de las herramientas que utilizas antes de definir la solución.' },
