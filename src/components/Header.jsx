@@ -18,14 +18,40 @@ export default function Header() {
     return () => { document.removeEventListener('keydown', onKey); mq.removeEventListener('change', onMq) }
   }, [open])
 
+  // Sombra del header al hacer scroll.
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Sección activa: la que cruza una franja alrededor del centro del viewport.
+  const [active, setActive] = useState('')
+  useEffect(() => {
+    const ids = NAV.map((l) => l.href.slice(1))
+    const visible = new Set()
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id)))
+        setActive(ids.find((id) => visible.has(id)) || '')
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el) })
+    return () => io.disconnect()
+  }, [])
+  const current = (href) => (href.slice(1) === active ? 'true' : undefined)
+
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container">
         <a className="brand" href="#inicio" aria-label="DTA Next — Inicio">
           <img src="/brand/dta-next-logo.png" width="224" height="48" alt="DTA Next — Inicio" />
         </a>
         <nav className="nav" aria-label="Principal">
-          {NAV.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
+          {NAV.map((l) => <a key={l.href} href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
         </nav>
         <a className="button button--primary header-cta" href="#contacto">Cotiza tu proyecto</a>
         <button

@@ -234,3 +234,40 @@
 .footer-end { display: flex; align-items: center; gap: 16px; }
 .social-link { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--brand-ink); text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast), background-color var(--duration-fast); }
 .social-link:hover { color: var(--brand-blue); border-color: var(--brand-blue); background: rgb(36 87 255 / 6%); }
+
+/* ---------- Mejoras de presentación del hero y del header ---------- */
+.site-header { transition: box-shadow var(--duration-normal) var(--ease-standard); }
+.site-header.is-scrolled { box-shadow: 0 6px 24px rgb(16 22 27 / 8%); }
+.nav a[aria-current="true"] { border-bottom-color: var(--brand-blue); color: var(--brand-blue); }
+
+/* Fondo con un degradado sutil de la marca (sin efectos decorativos) */
+.hero { background: radial-gradient(55% 75% at 78% 42%, rgb(36 87 255 / 24%) 0%, rgb(36 87 255 / 0%) 70%), var(--brand-ink); }
+
+/* Título equilibrado en líneas */
+.hero h1 { font-size: clamp(2.5rem, 1.6rem + 2.7vw, 3.5rem); text-wrap: balance; }
+.hero h1 .accent { text-wrap: balance; }
+
+/* Franja de confianza bajo los botones */
+.hero__points { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--color-border-dark); color: var(--color-text-inverse-muted); font-size: .9375rem; }
+.hero__points li { display: flex; align-items: center; gap: 8px; }
+.hero__points .icon { width: 20px; height: 20px; color: var(--brand-cyan); }
+
+/* Visual más grande, con una segunda tarjeta superpuesta */
+.hero__visual { position: relative; }
+.hero .ops { min-height: 400px; }
+.hero .ops__main { padding: 48px 24px 24px; }
+.hero .ops__title { font-size: 1.1875rem; margin-bottom: 16px; }
+.hero .req { padding: 16px 0; grid-template-columns: 40px 1fr auto; gap: 14px; }
+.hero .req__ico { width: 40px; height: 40px; }
+.hero .req strong { font-size: .9375rem; }
+.hero .req small { font-size: .75rem; }
+.float-card { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; background: #fff; color: var(--brand-ink); border-radius: var(--radius-md); padding: 12px 14px; margin-top: 16px; box-shadow: var(--shadow-window); }
+.float-card .req__ico { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; }
+.float-card strong { display: block; font-size: .875rem; line-height: 1.3; }
+.float-card small { display: block; font-size: .75rem; color: var(--color-text-muted); }
+@media (min-width: 1024px) {
+  .float-card { position: absolute; left: -40px; bottom: -28px; width: 370px; margin-top: 0; }
+}
+@media (min-width: 1024px) {
+  .hero .ops__main { padding-bottom: 64px; }
+}

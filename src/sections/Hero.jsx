@@ -2,6 +2,8 @@ import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
 import { MockToolbar, Chip } from '../components/ProductWindow.jsx'
 
+const POINTS = ['Alcance definido', 'Pruebas funcionales', 'Documentación']
+
 const REQUESTS = [
   { icon: 'i-file', ok: false, title: 'Solicitud recibida', sub: 'Formulario web', tone: 'ok', label: 'Completado' },
   { icon: 'i-check', ok: true, title: 'Documento validado', sub: 'Revisión automática', tone: 'prog', label: 'En proceso' },
@@ -22,8 +24,14 @@ export default function Hero() {
             <Button href="#contacto">Cuéntanos tu proyecto</Button>
             <Button href="#demos" variant="secondary-dark">Explorar demos</Button>
           </div>
+          <ul className="hero__points" aria-label="Lo que incluye cada proyecto">
+            {POINTS.map((p) => (
+              <li key={p}><Icon name="i-check-circle" />{p}</li>
+            ))}
+          </ul>
         </div>
 
+        <div className="hero__visual">
         <figure className="window" style={{ margin: 0 }} aria-label="Interfaz ilustrativa de un centro de operaciones">
           <span className="window__badge">Demo ilustrativa</span>
           <div className="ops">
@@ -49,6 +57,15 @@ export default function Hero() {
             </div>
           </div>
         </figure>
+        <div className="float-card" aria-hidden="true">
+          <span className="req__ico req__ico--ok"><Icon name="i-handshake" /></span>
+          <span>
+            <strong>Respuesta lista para aprobar</strong>
+            <small>SOL-1048 · Borrador preparado</small>
+          </span>
+          <Chip tone="wait">Pendiente</Chip>
+        </div>
+        </div>
       </div>
     </section>
   )
