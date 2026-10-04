@@ -7,6 +7,7 @@ import LegalModal from './components/LegalModal.jsx'
 import Hero from './sections/Hero.jsx'
 import Problems from './sections/Problems.jsx'
 import Services from './sections/Services.jsx'
+import Engagements from './sections/Engagements.jsx'
 import Demos from './sections/Demos.jsx'
 import Deliverables from './sections/Deliverables.jsx'
 import Process from './sections/Process.jsx'
@@ -39,6 +40,7 @@ export default function App() {
         <Hero />
         <Problems />
         <Services selected={serviceModal} onSelect={setServiceModal} onQuote={goContact} />
+        <Engagements />
         <Demos onQuote={goContact} />
         <Deliverables />
         <Process />

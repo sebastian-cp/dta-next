@@ -45,3 +45,6 @@ dialog[open] { animation: pop var(--duration-normal) var(--ease-standard); }
 .legal p, .legal li { color: var(--color-text-muted); max-width: 65ch; }
 .legal ul { list-style: disc; padding-left: 20px; display: grid; gap: 6px; }
 .legal .actions { margin-top: 32px; }
+
+/* Ficha de servicio */
+.service-sheet > p { color: var(--color-text-muted); max-width: 65ch; }

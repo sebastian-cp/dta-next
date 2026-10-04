@@ -16,19 +16,28 @@ export const SERVICES = {
     icon: 'i-chip', title: 'Automatización con IA', summary: 'Flujos, asistentes e integraciones.',
     lead: 'Flujos, asistentes e integraciones que reducen el trabajo manual y repetitivo.',
     features: ['Diagnóstico del proceso.', 'Validaciones y trazabilidad.', 'Documentación y puesta en marcha.'],
-    uses: ['Extraer y ordenar información desde documentos y correos.', 'Conectar herramientas que hoy no se comunican entre sí.', 'Asistentes que apoyan a tu equipo, con revisión humana donde corresponde.'],
+    audience: 'Empresas con tareas repetitivas que dependen de correos, documentos o planillas.',
+    examples: ['Leer facturas y cotizaciones y registrarlas en tus planillas o sistemas.', 'Clasificar consultas entrantes y preparar respuestas para que una persona las apruebe.', 'Conectar herramientas que hoy no se comunican entre sí.', 'Avisar al equipo cuando un caso necesita revisión.'],
+    deliverables: ['Flujo automatizado funcionando.', 'Registro de lo que hace en cada paso.', 'Revisión humana donde corresponda.', 'Documentación de uso y puesta en marcha.'],
+    pricing: 'Depende del proceso a automatizar, de los documentos o herramientas involucradas y del nivel de revisión que necesites. Partimos con un diagnóstico para definir el alcance.',
   },
   web: {
     icon: 'i-monitor', title: 'Sitios web', summary: 'Una presencia digital diseñada para convertir.',
     lead: 'Una presencia digital clara, rápida y pensada para facilitar el contacto.',
     features: ['Diseño responsive.', 'Rendimiento y SEO técnico.', 'Formularios e integraciones.'],
-    uses: ['Presentar tu empresa y tus servicios con un mensaje claro.', 'Recibir consultas mediante formularios bien diseñados.', 'Integrarte con las herramientas que ya usas.'],
+    audience: 'Empresas y profesionales que necesitan presentar su servicio y recibir consultas con una web clara.',
+    examples: ['Sitio corporativo con servicios, nosotros y contacto.', 'Landing para captar consultas de un servicio específico.', 'Formulario de contacto con envío por correo.', 'Optimización técnica de velocidad y SEO base.'],
+    deliverables: ['Sitio publicado y adaptado a móvil.', 'Formulario de contacto funcionando.', 'Configuración técnica de rendimiento y SEO.', 'Indicaciones para actualizar el contenido.'],
+    pricing: 'Depende de la cantidad de secciones, del contenido disponible y de las integraciones (formularios, correo, agenda). Se define en la propuesta.',
   },
   app: {
     icon: 'i-code', title: 'Aplicaciones a medida', summary: 'Plataformas adaptadas a tu operación.',
     lead: 'Plataformas adaptadas a la forma en que opera tu equipo.',
     features: ['Diseño funcional.', 'Roles y permisos.', 'Pruebas y despliegue.'],
-    uses: ['Reemplazar planillas y procesos manuales por un sistema propio.', 'Gestionar solicitudes, usuarios y estados en un solo lugar.', 'Evolucionar la herramienta junto con tu operación.'],
+    audience: 'Equipos que hoy gestionan su operación en planillas, correos o herramientas separadas.',
+    examples: ['Sistema para recibir, asignar y dar seguimiento a solicitudes.', 'Panel con estados, responsables y actividad.', 'Portal interno con usuarios, roles y permisos.', 'Reportes y exportación de datos.'],
+    deliverables: ['Aplicación desplegada y probada.', 'Roles y permisos definidos.', 'Documentación técnica y de uso.', 'Acompañamiento en la puesta en marcha, según lo acordado.'],
+    pricing: 'Depende de los procesos a cubrir, de la cantidad de usuarios y roles, y de las integraciones. Se estima por etapas una vez definido el alcance.',
   },
 }
 
@@ -37,6 +46,13 @@ export const SERVICE_OPTIONS = [
   { value: 'web', label: 'Sitios web' },
   { value: 'app', label: 'Aplicaciones a medida' },
   { value: 'orientacion', label: 'Necesito orientación' },
+]
+
+export const ENGAGEMENTS = [
+  { icon: 'i-search', title: 'Diagnóstico inicial', text: 'Revisamos tu proceso y definimos qué conviene construir, con un plan y un alcance claros.' },
+  { icon: 'i-target', title: 'Proyecto con alcance definido', text: 'Entregables, plazos y condiciones acordados por escrito antes de comenzar.' },
+  { icon: 'i-repeat', title: 'Desarrollo por etapas', text: 'Avanzamos en entregas parciales que validamos contigo, ajustando el rumbo en el camino.' },
+  { icon: 'i-handshake', title: 'Mejoras y mantención', text: 'Soporte y evolución de la solución, con condiciones definidas en la propuesta.' },
 ]
 
 export const DELIVERABLES = [

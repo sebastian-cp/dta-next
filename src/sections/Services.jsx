@@ -14,6 +14,11 @@ function CheckList({ items }) {
 export default function Services({ selected, onSelect, onQuote }) {
   const current = selected ? SERVICES[selected] : null
   const close = () => onSelect(null)
+  const seeDemos = (e) => {
+    e.preventDefault()
+    close()
+    requestAnimationFrame(() => document.getElementById('demos')?.scrollIntoView())
+  }
 
   return (
     <section className="section--mist" id="soluciones" aria-labelledby="servicios-title">
@@ -39,17 +44,22 @@ export default function Services({ selected, onSelect, onQuote }) {
 
       <Modal open={!!current} onClose={close} titleId="ds-title">
         {current && (
-          <>
+          <div className="service-sheet">
             <h2 id="ds-title">{current.title}</h2>
             <p className="lead">{current.lead}</p>
-            <h3>Para qué sirve</h3>
-            <CheckList items={current.uses} />
-            <h3>Qué incluye</h3>
-            <CheckList items={current.features} />
+            <h3>Para quién es</h3>
+            <p>{current.audience}</p>
+            <h3>Ejemplos de lo que podemos construir</h3>
+            <CheckList items={current.examples} />
+            <h3>Qué recibes</h3>
+            <CheckList items={current.deliverables} />
+            <h3>Cómo se cotiza</h3>
+            <p>{current.pricing}</p>
             <ModalActions onClose={close}>
               <Button href="#contacto" onClick={(e) => { e.preventDefault(); onQuote(selected) }}>Cotizar este servicio</Button>
+              <Button variant="secondary" href="#demos" onClick={seeDemos}>Ver demos</Button>
             </ModalActions>
-          </>
+          </div>
         )}
       </Modal>
     </section>

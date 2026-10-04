@@ -271,3 +271,13 @@
 @media (min-width: 1024px) {
   .hero .ops__main { padding-bottom: 64px; }
 }
+
+/* Formas de trabajar */
+.engagements { display: grid; gap: 24px; }
+@media (min-width: 640px)  { .engagements { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .engagements { grid-template-columns: repeat(4, 1fr); } }
+.engagement { padding: 28px; box-shadow: none; }
+.engagement .icon { width: 32px; height: 32px; color: var(--brand-blue); margin-bottom: 16px; }
+.engagement h3 { font: 600 1.125rem/1.3 var(--font-body); margin-bottom: 8px; }
+.engagement p { color: var(--color-text-muted); font-size: .9375rem; }
+.engagements__cta { margin-top: 40px; }
