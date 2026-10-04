@@ -17,7 +17,8 @@ const RULES = {
 export default function Contact({ service, onServiceChange }) {
   const [values, setValues] = useState({ nombre: '', correo: '', empresa: '', mensaje: '' })
   const [errors, setErrors] = useState({})
-  const [validated, setValidated] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [website, setWebsite] = useState('') // campo trampa anti-bots
 
   const get = (name) => (name === 'servicio' ? service : values[name])
   const validate = (name) => {
@@ -29,19 +30,35 @@ export default function Contact({ service, onServiceChange }) {
     const v = e.target.value
     if (name === 'servicio') onServiceChange(v)
     else setValues((s) => ({ ...s, [name]: v }))
-    setValidated(false)
+    if (status !== 'sending') setStatus('idle')
     if (errors[name]) setErrors((er) => ({ ...er, [name]: RULES[name](v) }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
+    if (status === 'sending') return
     const bad = Object.keys(RULES).filter((n) => {
       const msg = RULES[n](get(n))
       setErrors((er) => ({ ...er, [n]: msg }))
       return msg
     })
     if (bad.length) { document.getElementById(`f-${bad[0]}`)?.focus(); return }
-    setValidated(true) // Sin integración real: nunca se muestra un envío exitoso.
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, servicio: service, website }),
+      })
+      if (!res.ok) throw new Error(String(res.status))
+      // Éxito solo tras la confirmación del servidor.
+      setValues({ nombre: '', correo: '', empresa: '', mensaje: '' })
+      onServiceChange('')
+      setErrors({})
+      setStatus('success')
+    } catch {
+      setStatus('error') // Se conservan los datos del usuario.
+    }
   }
 
   const field = (name) => ({
@@ -74,16 +91,28 @@ export default function Contact({ service, onServiceChange }) {
               </FormField>
               <FormField {...field('mensaje')} as="textarea" label="Mensaje" required span2 placeholder="Cuéntanos brevemente tu proyecto…" />
             </div>
-            <Button type="submit" block style={{ marginTop: 24 }}>Enviar consulta</Button>
-            <p className="form-note">
-              <strong>Formulario demostrativo:</strong> en este prototipo aún no está conectado a un servicio de envío, por lo que no se transmite ninguna información.
-            </p>
-            {validated && (
-              <div className="form-status" role="status">
-                <Icon name="i-info" />
-                <span>Los datos son válidos, pero <strong>tu consulta no fue enviada</strong>: este formulario es una demostración sin conexión a un servicio real.</span>
-              </div>
-            )}
+            {/* Campo trampa: invisible para personas, los bots suelen rellenarlo. */}
+            <div className="hp" aria-hidden="true">
+              <label htmlFor="f-website">No completar este campo</label>
+              <input id="f-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            </div>
+            <Button type="submit" block style={{ marginTop: 24 }} disabled={status === 'sending'} aria-disabled={status === 'sending'}>
+              {status === 'sending' ? 'Enviando…' : 'Enviar consulta'}
+            </Button>
+            <div role="status" aria-live="polite">
+              {status === 'success' && (
+                <div className="form-status form-status--ok">
+                  <Icon name="i-check-circle" />
+                  <span>Recibimos tu consulta. Te contactaremos al correo que indicaste.</span>
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="form-status form-status--error">
+                  <Icon name="i-alert" />
+                  <span>No pudimos enviar tu consulta. Intenta nuevamente.</span>
+                </div>
+              )}
+            </div>
           </form>
         </div>
       </div>

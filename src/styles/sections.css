@@ -216,3 +216,10 @@
 .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
 .shot-full { overflow: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); max-height: 62dvh; }
 .shot-full img { width: 100%; min-width: 720px; height: auto; }
+
+/* Estados del formulario de contacto */
+.form-status--ok { border-color: var(--color-success); background: #EAF7F0; color: #0C4A2F; }
+.form-status--ok .icon { color: var(--color-success); }
+.form-status--error { border-color: var(--color-error); background: #FDEEEC; color: #7A1810; }
+.form-status--error .icon { color: var(--color-error); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

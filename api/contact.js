@@ -1,0 +1,82 @@
+// Función serverless de Vercel: recibe el formulario y lo envía por correo con Resend.
+// Variables de entorno (se configuran en Vercel, nunca en el repo):
+//   RESEND_API_KEY  clave de API de Resend
+//   CONTACT_TO      correo que recibe las consultas
+//   CONTACT_FROM    remitente (opcional). Por defecto "DTA Next <onboarding@resend.dev>",
+//                   que solo permite enviar al correo dueño de la cuenta de Resend.
+
+const SERVICES = {
+  ia: 'Automatización con IA',
+  web: 'Sitios web',
+  app: 'Aplicaciones a medida',
+  orientacion: 'Necesito orientación',
+}
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+const clean = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST')
+    return res.status(405).json({ error: 'Método no permitido.' })
+  }
+
+  const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM } = process.env
+  if (!RESEND_API_KEY || !CONTACT_TO) {
+    console.error('Faltan variables de entorno RESEND_API_KEY o CONTACT_TO.')
+    return res.status(500).json({ error: 'Servicio no configurado.' })
+  }
+
+  const body = typeof req.body === 'string' ? safeParse(req.body) : req.body || {}
+
+  // Campo trampa para bots: si viene relleno, respondemos "ok" sin enviar nada.
+  if (clean(body.website, 200)) return res.status(200).json({ ok: true })
+
+  const nombre = clean(body.nombre, 120)
+  const correo = clean(body.correo, 200)
+  const empresa = clean(body.empresa, 120)
+  const servicio = clean(body.servicio, 40)
+  const mensaje = clean(body.mensaje, 5000)
+
+  const valid =
+    nombre.length >= 2 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo) &&
+    servicio in SERVICES &&
+    mensaje.length >= 10
+  if (!valid) return res.status(400).json({ error: 'Datos inválidos.' })
+
+  const html = `
+    <h2>Nueva consulta desde el sitio de DTA Next</h2>
+    <p><strong>Nombre:</strong> ${esc(nombre)}</p>
+    <p><strong>Correo:</strong> ${esc(correo)}</p>
+    <p><strong>Empresa:</strong> ${esc(empresa) || '—'}</p>
+    <p><strong>Servicio de interés:</strong> ${esc(SERVICES[servicio])}</p>
+    <p><strong>Mensaje:</strong></p>
+    <p style="white-space:pre-wrap">${esc(mensaje)}</p>`
+
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: CONTACT_FROM || 'DTA Next <onboarding@resend.dev>',
+        to: [CONTACT_TO],
+        reply_to: correo,
+        subject: `Consulta web: ${SERVICES[servicio]} — ${nombre}`.replace(/[\r\n]+/g, ' '),
+        html,
+      }),
+    })
+    if (!r.ok) {
+      console.error('Resend respondió', r.status, await r.text())
+      return res.status(502).json({ error: 'No se pudo enviar.' })
+    }
+    return res.status(200).json({ ok: true })
+  } catch (err) {
+    console.error('Error al llamar a Resend', err)
+    return res.status(502).json({ error: 'No se pudo enviar.' })
+  }
+}
+
+function safeParse(s) {
+  try { return JSON.parse(s) } catch { return {} }
+}
