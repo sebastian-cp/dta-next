@@ -3,12 +3,14 @@ import Icon from '../components/Icon.jsx'
 import { MockToolbar } from '../components/ProductWindow.jsx'
 import { BoardPreview, BoardModal } from '../demos/BoardDemo.jsx'
 import { DocsPreview, DocsModal } from '../demos/DocsDemo.jsx'
+import { ImagePreview, ImageModal } from '../demos/ImageDemo.jsx'
+import { IMAGE_DEMOS } from '../data/content.js'
 
-function DemoCard({ title, label, caption, onOpen, children }) {
+function DemoCard({ title, label, caption, onOpen, badge = 'Demo', children }) {
   return (
     <article>
       <div className="window demo-win" role="img" aria-label={label}>
-        <span className="window__badge">Demo</span>
+        <span className="window__badge">{badge}</span>
         <div className="demo-win__head">
           <strong><img src="/brand/dta-next-symbol.png" alt="" width="22" height="18" />{title}</strong>
         </div>
@@ -54,11 +56,30 @@ export default function Demos({ onQuote }) {
           >
             <DocsPreview />
           </DemoCard>
+          <DemoCard
+            title="Sitio web de ejemplo"
+            badge="Vista previa"
+            label={IMAGE_DEMOS.web.alt}
+            caption="Una presencia digital cuidada, de la portada al contacto."
+            onOpen={() => setOpen('web')}
+          >
+            <ImagePreview demo={IMAGE_DEMOS.web} />
+          </DemoCard>
+          <DemoCard
+            title="Panel de solicitudes"
+            badge="Vista previa"
+            label={IMAGE_DEMOS.panel.alt}
+            caption="Solicitudes clasificadas y respuestas listas para aprobar."
+            onOpen={() => setOpen('panel')}
+          >
+            <ImagePreview demo={IMAGE_DEMOS.panel} />
+          </DemoCard>
         </div>
       </div>
 
       <BoardModal open={open === 'board'} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
       <DocsModal open={open === 'docs'} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
+      <ImageModal demo={IMAGE_DEMOS[open]} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
     </section>
   )
 }
