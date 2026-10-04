@@ -9,7 +9,7 @@ export default function About() {
           <div>
             <p className="eyebrow">Sobre DTA Next</p>
             <h2 id="nosotros-title">Trato directo. Criterio técnico.</h2>
-            <p className="lead">En DTA Next, un equipo de profesionales de la ingeniería en informática diseña, desarrolla e implementa soluciones a medida. Cada proyecto parte de entender tu negocio y definir una solución viable.</p>
+            <p className="lead">En DTA Next, un equipo de profesionales diseña, desarrolla e implementa soluciones a medida. Cada proyecto parte de entender tu negocio y definir una solución viable.</p>
           </div>
           <div className="mv">
             <div className="mv__item"><h3>Misión</h3><p>{MISSION}</p></div>
