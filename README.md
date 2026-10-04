@@ -21,5 +21,5 @@ npm run build    # compilación en dist/
 
 ## Notas
 
-- El formulario de contacto es demostrativo: valida pero no envía nada. Falta integrar un servicio real de envío y publicar una política de privacidad antes de habilitarlo.
+- El formulario de contacto envía por correo con Resend mediante `api/contact.js`. Requiere las variables de entorno de `.env.example` (configuradas en Vercel). Falta publicar una política de privacidad.
 - Pendiente: reconstruir el logo como SVG maestro y la versión blanca limpia.
