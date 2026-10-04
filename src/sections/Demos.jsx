@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Icon from '../components/Icon.jsx'
-import { MockToolbar } from '../components/ProductWindow.jsx'
-import { BoardPreview, BoardModal } from '../demos/BoardDemo.jsx'
+import { PanelModal } from '../demos/RequestsPanel.jsx'
+import { AutomationPreview, AutomationModal } from '../demos/AutomationFlow.jsx'
 import { DocsPreview, DocsModal } from '../demos/DocsDemo.jsx'
 import { ImagePreview, ImageModal } from '../demos/ImageDemo.jsx'
 import { IMAGE_DEMOS } from '../data/content.js'
@@ -27,8 +27,9 @@ function DemoCard({ title, label, caption, onOpen, badge = 'Demo', children }) {
 }
 
 export default function Demos({ onQuote }) {
-  const [open, setOpen] = useState(null) // 'board' | 'docs' | null
+  const [open, setOpen] = useState(null) // 'panel' | 'automation' | 'docs' | 'web' | null
   const close = () => setOpen(null)
+  const quote = (s) => { close(); onQuote(s) }
 
   return (
     <section className="section--dark on-dark" id="demos" aria-labelledby="demos-title">
@@ -36,17 +37,24 @@ export default function Demos({ onQuote }) {
         <div className="section-head">
           <p className="eyebrow">Demos</p>
           <h2 id="demos-title">Así puede verse tu próxima solución.</h2>
-          <p className="lead">Conceptos ilustrativos de soluciones que podemos desarrollar.</p>
+          <p className="lead">Conceptos ilustrativos de soluciones que podemos desarrollar. Pruébalos: son interactivos y usan datos ficticios.</p>
         </div>
         <div className="demos">
           <DemoCard
-            title="Gestión de solicitudes"
-            label="Vista previa de un tablero de gestión de solicitudes con columnas Nuevas, En proceso y Completadas"
-            caption="De un formulario a un flujo ordenado."
-            onOpen={() => setOpen('board')}
+            title="Panel de solicitudes"
+            label={IMAGE_DEMOS.panel.alt}
+            caption="Filtra, revisa y aprueba respuestas en un solo lugar."
+            onOpen={() => setOpen('panel')}
           >
-            <MockToolbar />
-            <BoardPreview />
+            <ImagePreview demo={IMAGE_DEMOS.panel} />
+          </DemoCard>
+          <DemoCard
+            title="Automatización paso a paso"
+            label="Vista previa de un flujo automatizado: correo recibido, clasificar, extraer datos, validar y registrar"
+            caption="Del correo entrante al registro, con una persona cuando hace falta."
+            onOpen={() => setOpen('automation')}
+          >
+            <AutomationPreview />
           </DemoCard>
           <DemoCard
             title="Asistente documental"
@@ -65,21 +73,13 @@ export default function Demos({ onQuote }) {
           >
             <ImagePreview demo={IMAGE_DEMOS.web} />
           </DemoCard>
-          <DemoCard
-            title="Panel de solicitudes"
-            badge="Vista previa"
-            label={IMAGE_DEMOS.panel.alt}
-            caption="Solicitudes clasificadas y respuestas listas para aprobar."
-            onOpen={() => setOpen('panel')}
-          >
-            <ImagePreview demo={IMAGE_DEMOS.panel} />
-          </DemoCard>
         </div>
       </div>
 
-      <BoardModal open={open === 'board'} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
-      <DocsModal open={open === 'docs'} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
-      <ImageModal demo={IMAGE_DEMOS[open]} onClose={close} onQuote={(s) => { close(); onQuote(s) }} />
+      <PanelModal open={open === 'panel'} onClose={close} onQuote={quote} />
+      <AutomationModal open={open === 'automation'} onClose={close} onQuote={quote} />
+      <DocsModal open={open === 'docs'} onClose={close} onQuote={quote} />
+      <ImageModal demo={open === 'web' ? IMAGE_DEMOS.web : null} onClose={close} onQuote={quote} />
     </section>
   )
 }

@@ -70,18 +70,6 @@ export const FAQ = [
   { q: '¿Cómo se acuerda la entrega del código?', a: 'La entrega del código, los accesos y las condiciones de uso se definen expresamente en la propuesta y el contrato.' },
 ]
 
-export const BOARD_COLUMNS = ['Nuevas', 'En proceso', 'Completadas']
-export const BOARD_DOTS = ['#2457FF', '#E0A100', '#147D4E']
-export const BOARD_INITIAL = [
-  { id: 1, title: 'Solicitud de cotización', company: 'Empresa A', col: 0 },
-  { id: 2, title: 'Soporte técnico', company: 'Empresa B', col: 0 },
-  { id: 3, title: 'Información general', company: 'Empresa C', col: 0 },
-  { id: 4, title: 'Implementación', company: 'Empresa D', col: 1 },
-  { id: 5, title: 'Consulta comercial', company: 'Empresa E', col: 1 },
-  { id: 6, title: 'Activación de cuenta', company: 'Empresa F', col: 2 },
-  { id: 7, title: 'Capacitación', company: 'Empresa G', col: 2 },
-]
-
 export const IMAGE_DEMOS = {
   web: {
     title: 'Sitio web para un estudio de arquitectura',
