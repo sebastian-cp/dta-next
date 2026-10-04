@@ -7,7 +7,7 @@ body { margin: 0; font-family: var(--font-body); font-size: 1rem; line-height: 1
 img, svg { display: block; max-width: 100%; }
 h1, h2, h3, h4 { font-family: var(--font-heading); margin: 0; }
 p { margin: 0; }
-ul { margin: 0; padding: 0; list-style: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; border-radius: 4px; }
