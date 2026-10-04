@@ -21,5 +21,5 @@ npm run build    # compilación en dist/
 
 ## Notas
 
-- El formulario de contacto envía por correo con Resend mediante `api/contact.js`. Requiere las variables de entorno de `.env.example` (configuradas en Vercel). Falta publicar una política de privacidad.
+- El formulario de contacto envía por correo con Resend mediante `api/contact.js`. Requiere las variables de entorno de `.env.example` (configuradas en Vercel). La política de privacidad y el aviso legal están en `src/data/legal.js` (borrador pendiente de revisión legal).
 - Pendiente: reconstruir el logo como SVG maestro y la versión blanca limpia.

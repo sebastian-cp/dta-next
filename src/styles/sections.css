@@ -222,3 +222,10 @@
 .form-status--error { border-color: var(--color-error); background: #FDEEEC; color: #7A1810; }
 .form-status--error .icon { color: var(--color-error); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Enlaces legales (botones con aspecto de enlace) */
+.footer-nav button, .inline-link { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.footer-nav button { font-weight: 500; font-size: .9375rem; min-height: 44px; display: inline-flex; align-items: center; }
+.footer-nav button:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 4px; }
+.inline-link { color: var(--brand-blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.form-legal { font-size: .875rem; color: var(--color-text-muted); margin-top: 16px; }

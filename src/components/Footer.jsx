@@ -1,6 +1,6 @@
 import { NAV } from '../data/content.js'
 
-export default function Footer() {
+export default function Footer({ onOpenLegal }) {
   return (
     <footer className="site-footer">
       <div className="container">
@@ -10,6 +10,8 @@ export default function Footer() {
         <nav className="footer-nav" aria-label="Pie de página">
           {NAV.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
           <a href="#contacto">Contacto</a>
+          <button type="button" onClick={() => onOpenLegal('privacy')}>Política de privacidad</button>
+          <button type="button" onClick={() => onOpenLegal('legal')}>Aviso legal</button>
         </nav>
         <p className="footer-copy">© {new Date().getFullYear()} DTA Next</p>
       </div>

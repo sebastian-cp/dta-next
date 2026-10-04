@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Sprite from './components/Sprite.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
+import LegalModal from './components/LegalModal.jsx'
 import Hero from './sections/Hero.jsx'
 import Problems from './sections/Problems.jsx'
 import Services from './sections/Services.jsx'
@@ -16,6 +17,7 @@ import Contact from './sections/Contact.jsx'
 export default function App() {
   const [serviceModal, setServiceModal] = useState(null)
   const [contactService, setContactService] = useState('')
+  const [legalDoc, setLegalDoc] = useState(null) // 'privacy' | 'legal' | null
 
   // Cierra modales, preselecciona el servicio y lleva al formulario.
   const goContact = (service) => {
@@ -42,9 +44,10 @@ export default function App() {
         <Process />
         <About />
         <Faq />
-        <Contact service={contactService} onServiceChange={setContactService} />
+        <Contact service={contactService} onServiceChange={setContactService} onOpenLegal={setLegalDoc} />
       </main>
-      <Footer />
+      <Footer onOpenLegal={setLegalDoc} />
+      <LegalModal doc={legalDoc} onClose={() => setLegalDoc(null)} />
       <Analytics />
     </>
   )

@@ -14,7 +14,7 @@ const RULES = {
   mensaje: (v) => (v.trim().length < 10 ? 'Cuéntanos un poco más sobre tu proyecto (al menos 10 caracteres).' : ''),
 }
 
-export default function Contact({ service, onServiceChange }) {
+export default function Contact({ service, onServiceChange, onOpenLegal }) {
   const [values, setValues] = useState({ nombre: '', correo: '', empresa: '', mensaje: '' })
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | success | error
@@ -99,6 +99,10 @@ export default function Contact({ service, onServiceChange }) {
             <Button type="submit" block style={{ marginTop: 24 }} disabled={status === 'sending'} aria-disabled={status === 'sending'}>
               {status === 'sending' ? 'Enviando…' : 'Enviar consulta'}
             </Button>
+            <p className="form-legal">
+              Al enviar este formulario aceptas que usemos tus datos para responder tu consulta. Más información en la{' '}
+              <button type="button" className="inline-link" onClick={() => onOpenLegal('privacy')}>Política de privacidad</button>.
+            </p>
             <div role="status" aria-live="polite">
               {status === 'success' && (
                 <div className="form-status form-status--ok">
