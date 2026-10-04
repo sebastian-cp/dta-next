@@ -150,10 +150,6 @@
 .about { display: grid; gap: 40px; align-items: start; }
 @media (min-width: 1024px) { .about { grid-template-columns: 7fr 5fr; gap: 64px; } }
 .about .lead { margin-top: 20px; }
-.person { margin-top: 32px; display: flex; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid var(--color-border); }
-.person__avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-ink); color: #fff; display: grid; place-items: center; font: 700 1.125rem/1 var(--font-heading); letter-spacing: .02em; flex: none; }
-.person strong { display: block; font: 700 1.125rem/1.3 var(--font-heading); }
-.person span { color: var(--color-text-muted); font-size: .9375rem; }
 .mv { display: grid; gap: 16px; }
 .mv__item { background: var(--brand-mist); border: 1px solid var(--color-border); border-left: 4px solid var(--brand-blue); border-radius: var(--radius-md); padding: 24px; }
 .mv__item h3 { font: 600 .8125rem/1.4 var(--font-body); text-transform: uppercase; letter-spacing: .08em; color: var(--brand-blue); margin-bottom: 8px; }

@@ -9,11 +9,7 @@ export default function About() {
           <div>
             <p className="eyebrow">Sobre DTA Next</p>
             <h2 id="nosotros-title">Trato directo. Criterio técnico.</h2>
-            <p className="lead">DTA Next es una consultora liderada por Sebastián Cofré, ingeniero en informática. Cada proyecto parte de entender tu negocio y definir una solución viable.</p>
-            <div className="person">
-              <span className="person__avatar" aria-hidden="true">SC</span>
-              <div><strong>Sebastián Cofré</strong><span>Ingeniería en Informática</span></div>
-            </div>
+            <p className="lead">En DTA Next, un equipo de ingeniería en informática diseña y desarrolla soluciones a medida. Cada proyecto parte de entender tu negocio y definir una solución viable.</p>
           </div>
           <div className="mv">
             <div className="mv__item"><h3>Misión</h3><p>{MISSION}</p></div>
