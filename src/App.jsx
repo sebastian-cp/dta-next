@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Sprite from './components/Sprite.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
@@ -44,6 +45,7 @@ export default function App() {
         <Contact service={contactService} onServiceChange={setContactService} />
       </main>
       <Footer />
+      <Analytics />
     </>
   )
 }
