@@ -24,8 +24,29 @@ function initialItems() {
   }))
 }
 
+/** Vista previa nítida del panel (tarjeta de la sección Demos), armada con componentes. */
+export function PanelPreview() {
+  return (
+    <div className="panel-preview" aria-hidden="true">
+      <p className="panel-preview__title">Solicitudes</p>
+      <div className="panel-preview__tabs">
+        <span className="is-on">Por revisar <b>3</b></span><span>Asignadas <b>2</b></span><span>Cerradas <b>1</b></span>
+      </div>
+      <ul>
+        {REQUESTS.slice(0, 4).map((r) => (
+          <li key={r.id}>
+            <span><strong>{r.cliente}</strong><small>{r.id} · {r.servicio}</small></span>
+            <Chip tone={ESTADOS[r.estado].tone}>{ESTADOS[r.estado].label}</Chip>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function PanelApp({ onClose, onQuote }) {
   const [items, setItems] = useState(initialItems)
+  const [mobileView, setMobileView] = useState('list') // 'list' | 'detail' (solo aplica en pantallas angostas)
   const [tab, setTab] = useState('todas')
   const [query, setQuery] = useState('')
   const [servicio, setServicio] = useState('')
@@ -53,7 +74,12 @@ function PanelApp({ onClose, onQuote }) {
   const update = (id, patch) => setItems((arr) => arr.map((i) => (i.id === id ? { ...i, ...patch } : i)))
   const addActivity = (item, text) => [...item.actividad, { t: addMinutes(item.hora, item.actividad.length + 20), text }]
 
-  const select = (id) => { setSelectedId(id); setEditing(false) }
+  const select = (id) => { setSelectedId(id); setEditing(false); setMobileView('detail') }
+  const backToList = () => {
+    setMobileView('list')
+    // Devuelve el foco a la solicitud que se estaba viendo.
+    requestAnimationFrame(() => document.querySelector('.app__list [aria-pressed="true"]')?.focus())
+  }
   const changeEstado = (e) => {
     update(selected.id, { estado: e.target.value, actividad: addActivity(selected, `Estado cambiado a ${ESTADOS[e.target.value].label}`) })
     setNotice(`Estado de ${selected.id} cambiado a ${ESTADOS[e.target.value].label}.`)
@@ -78,10 +104,13 @@ function PanelApp({ onClose, onQuote }) {
       <h2 id="dp-title">Panel de solicitudes</h2>
       <div className="demo-banner">
         <Icon name="i-info" />
-        <span>Demostración con datos ficticios. No es una aplicación real ni se conecta a ningún sistema: puedes filtrar, revisar y aprobar respuestas, y nada se envía.</span>
+        <span>
+          <span className="bn-long">Demostración con datos ficticios. No es una aplicación real ni se conecta a ningún sistema: puedes filtrar, revisar y aprobar respuestas, y nada se envía.</span>
+          <span className="bn-short">Datos ficticios. Nada se envía ni se guarda.</span>
+        </span>
       </div>
 
-      <div className="app">
+      <div className={`app${mobileView === 'detail' ? ' is-detail' : ''}`}>
         <nav className="app__side" aria-label="Menú de la demo">
           <p className="app__brand">Operaciones</p>
           {NAV.map((n) => (
@@ -90,6 +119,7 @@ function PanelApp({ onClose, onQuote }) {
         </nav>
 
         <div className="app__main">
+          <div className="app__browse">
           <div className="app__head">
             <div>
               <p className="app__title">Solicitudes</p>
@@ -122,6 +152,7 @@ function PanelApp({ onClose, onQuote }) {
               <option value="">Responsable</option>
               {RESPONSABLES.map((s) => <option key={s}>{s}</option>)}
             </select>
+          </div>
           </div>
 
           <div className="app__body">
@@ -173,6 +204,9 @@ function PanelApp({ onClose, onQuote }) {
 
             {selected && (
               <aside className="detail" aria-label={`Detalle de ${selected.id}`}>
+                <button type="button" className="detail__back" onClick={backToList}>
+                  <Icon name="i-arrow" size="sm" />Volver a solicitudes
+                </button>
                 <div className="detail__top">
                   <h3>{selected.id}</h3>
                   <Chip tone={ESTADOS[selected.estado].tone}>{ESTADOS[selected.estado].label}</Chip>

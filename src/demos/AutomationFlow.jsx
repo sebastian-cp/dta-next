@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
 import Modal, { ModalActions } from '../components/Modal.jsx'
@@ -36,7 +36,13 @@ function Flow({ scenario }) {
   const [auto, setAuto] = useState(false)
   const [log, setLog] = useState([])
 
+  const reviewRef = useRef(null)
   const finished = done >= FLOW_STEPS.length
+
+  // Si el flujo se detiene a la espera de una persona, lleva la alerta a la vista.
+  useEffect(() => {
+    if (waiting) reviewRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }, [waiting])
   const push = (text) => setLog((l) => [...l, { t: `09:14:${pad(l.length * 2 + 1)}`, text }])
 
   const advance = () => {
@@ -91,6 +97,12 @@ function Flow({ scenario }) {
         <p className="auto__body">{scenario.email.cuerpo}</p>
       </div>
 
+      <div className="auto__controls">
+        <Button onClick={() => { setAuto(true) }} disabled={finished || waiting || auto}>Ejecutar flujo</Button>
+        <Button variant="secondary" onClick={advance} disabled={finished || waiting || auto}>Siguiente paso</Button>
+        <Button variant="secondary" onClick={reset} disabled={done === 0 && log.length === 0}>Reiniciar</Button>
+      </div>
+
       <ol className="nodes" aria-label="Pasos del flujo">
         {FLOW_STEPS.map((st, i) => {
           const state = stepState(i)
@@ -104,14 +116,8 @@ function Flow({ scenario }) {
         })}
       </ol>
 
-      <div className="auto__controls">
-        <Button onClick={() => { setAuto(true) }} disabled={finished || waiting || auto}>Ejecutar flujo</Button>
-        <Button variant="secondary" onClick={advance} disabled={finished || waiting || auto}>Siguiente paso</Button>
-        <Button variant="secondary" onClick={reset} disabled={done === 0 && log.length === 0}>Reiniciar</Button>
-      </div>
-
       {waiting && (
-        <div className="review" role="alert">
+        <div className="review" role="alert" ref={reviewRef}>
           <Icon name="i-alert" />
           <div>
             <strong>Este caso necesita a una persona.</strong>
@@ -154,7 +160,10 @@ function AutomationApp({ onClose, onQuote }) {
       <h2 id="da-title">Automatización paso a paso</h2>
       <div className="demo-banner">
         <Icon name="i-info" />
-        <span>Simulación con correos de ejemplo ficticios. Los resultados están predefinidos: no se usa inteligencia artificial real ni se procesa información tuya.</span>
+        <span>
+          <span className="bn-long">Simulación con correos de ejemplo ficticios. Los resultados están predefinidos: no se usa inteligencia artificial real ni se procesa información tuya.</span>
+          <span className="bn-short">Simulación con datos ficticios, sin IA real.</span>
+        </span>
       </div>
       <div className="seg seg--wide" role="group" aria-label="Elige un caso de ejemplo">
         {SCENARIOS.map((s) => (

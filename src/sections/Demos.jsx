@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Icon from '../components/Icon.jsx'
-import { PanelModal } from '../demos/RequestsPanel.jsx'
+import { PanelModal, PanelPreview } from '../demos/RequestsPanel.jsx'
 import { AutomationPreview, AutomationModal } from '../demos/AutomationFlow.jsx'
 import { DocsPreview, DocsModal } from '../demos/DocsDemo.jsx'
 import { ImagePreview, ImageModal } from '../demos/ImageDemo.jsx'
@@ -42,11 +42,11 @@ export default function Demos({ onQuote }) {
         <div className="demos">
           <DemoCard
             title="Panel de solicitudes"
-            label={IMAGE_DEMOS.panel.alt}
+            label="Vista previa de un panel de solicitudes con estados: por revisar, asignada, agendada y cerrada"
             caption="Filtra, revisa y aprueba respuestas en un solo lugar."
             onOpen={() => setOpen('panel')}
           >
-            <ImagePreview demo={IMAGE_DEMOS.panel} />
+            <PanelPreview />
           </DemoCard>
           <DemoCard
             title="Automatización paso a paso"

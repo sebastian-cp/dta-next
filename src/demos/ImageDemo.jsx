@@ -22,6 +22,7 @@ export function ImageModal({ demo, onClose, onQuote }) {
             <Icon name="i-info" />
             <span>{demo.notice}</span>
           </div>
+          <p className="shot-hint">Desliza para ver la imagen completa →</p>
           <div className="shot-full" tabIndex={0} role="group" aria-label={`Imagen completa: ${demo.title}. Usa el scroll para recorrerla.`}>
             <img src={demo.src} width={demo.width} height={demo.height} alt={demo.alt} />
           </div>

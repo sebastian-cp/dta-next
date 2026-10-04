@@ -80,15 +80,6 @@ export const IMAGE_DEMOS = {
     alt: 'Sitio web conceptual de un estudio de arquitectura e interiorismo ficticio: encabezado con navegación, título "Espacios para habitar con calma", imagen principal de una vivienda en el bosque y tres proyectos destacados.',
     notice: 'Concepto ilustrativo de un sitio web. El estudio y los proyectos son ficticios y no corresponden a clientes de DTA Next.',
   },
-  panel: {
-    title: 'Panel de solicitudes con automatización',
-    src: '/demos/demo-solicitudes.webp',
-    width: 1536,
-    height: 1024,
-    service: 'ia',
-    alt: 'Panel de operaciones conceptual: lista de solicitudes con folio, cliente, estado y responsable; a la derecha el detalle de la solicitud SOL-1048, su actividad automática y un borrador de respuesta pendiente de aprobación.',
-    notice: 'Concepto ilustrativo con datos ficticios. No es una aplicación real ni corresponde a clientes de DTA Next.',
-  },
 }
 
 export const DOC_SAMPLE = {
