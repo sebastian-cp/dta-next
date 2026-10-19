@@ -83,25 +83,27 @@ export default async function handler(req, res) {
 async function notifyDiscord({ nombre, correo, empresa, servicio, mensaje }) {
   const url = process.env.DISCORD_WEBHOOK_URL
   if (!url) return
+  const payload = {
+    allowed_mentions: { parse: [] },
+    embeds: [{
+      title: `Nueva consulta: ${servicio}`,
+      color: 0x2563eb,
+      fields: [
+        { name: 'Nombre', value: nombre, inline: true },
+        { name: 'Correo', value: correo, inline: true },
+        { name: 'Empresa', value: empresa || '—', inline: true },
+        { name: 'Mensaje', value: mensaje.slice(0, 1000) },
+      ],
+      timestamp: new Date().toISOString(),
+    }],
+  }
+  const send = (body) =>
+    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
   try {
-    const r = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        allowed_mentions: { parse: [] },
-        embeds: [{
-          title: `Nueva consulta: ${servicio}`,
-          color: 0x2563eb,
-          fields: [
-            { name: 'Nombre', value: nombre, inline: true },
-            { name: 'Correo', value: correo, inline: true },
-            { name: 'Empresa', value: empresa || '—', inline: true },
-            { name: 'Mensaje', value: mensaje.slice(0, 1000) },
-          ],
-          timestamp: new Date().toISOString(),
-        }],
-      }),
-    })
+    // Los canales tipo foro exigen thread_name: cada consulta se crea como una publicación.
+    let r = await send({ ...payload, thread_name: `${nombre} — ${servicio}`.slice(0, 100) })
+    // En un canal de texto normal thread_name no se admite: se reintenta sin él.
+    if (r.status === 400) r = await send(payload)
     if (!r.ok) console.error('Discord respondió', r.status, await r.text())
   } catch (err) {
     console.error('Error al llamar a Discord', err)
