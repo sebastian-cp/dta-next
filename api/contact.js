@@ -4,6 +4,7 @@
 //   CONTACT_TO      correo que recibe las consultas
 //   CONTACT_FROM    remitente (opcional). Por defecto "DTA Next <onboarding@resend.dev>",
 //                   que solo permite enviar al correo dueño de la cuenta de Resend.
+//   DISCORD_WEBHOOK_URL  webhook del canal de Discord que recibe el aviso (opcional)
 
 const SERVICES = {
   ia: 'Automatización con IA',
@@ -70,10 +71,40 @@ export default async function handler(req, res) {
       console.error('Resend respondió', r.status, await r.text())
       return res.status(502).json({ error: 'No se pudo enviar.' })
     }
+    await notifyDiscord({ nombre, correo, empresa, servicio: SERVICES[servicio], mensaje })
     return res.status(200).json({ ok: true })
   } catch (err) {
     console.error('Error al llamar a Resend', err)
     return res.status(502).json({ error: 'No se pudo enviar.' })
+  }
+}
+
+// Aviso al canal de Discord. Si falla, solo se registra: el correo ya se envió.
+async function notifyDiscord({ nombre, correo, empresa, servicio, mensaje }) {
+  const url = process.env.DISCORD_WEBHOOK_URL
+  if (!url) return
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        allowed_mentions: { parse: [] },
+        embeds: [{
+          title: `Nueva consulta: ${servicio}`,
+          color: 0x2563eb,
+          fields: [
+            { name: 'Nombre', value: nombre, inline: true },
+            { name: 'Correo', value: correo, inline: true },
+            { name: 'Empresa', value: empresa || '—', inline: true },
+            { name: 'Mensaje', value: mensaje.slice(0, 1000) },
+          ],
+          timestamp: new Date().toISOString(),
+        }],
+      }),
+    })
+    if (!r.ok) console.error('Discord respondió', r.status, await r.text())
+  } catch (err) {
+    console.error('Error al llamar a Discord', err)
   }
 }
 
