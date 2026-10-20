@@ -18,33 +18,17 @@ const RULES = {
 
 const EMPTY = { nombre: '', correo: '', empresa: '', mensaje: '' }
 
-const NEXT_STEPS = [
-  'Revisamos tu consulta y te respondemos por correo' + (CONTACT.responseTime ? ` ${CONTACT.responseTime}.` : '.'),
-  'Si hace falta, te proponemos una reunión online para entender mejor tu caso.',
-  'Con la información necesaria, te enviamos una propuesta o un diagnóstico por escrito.',
-]
+const NEXT_STEP = `Respondemos por correo${CONTACT.responseTime ? ` ${CONTACT.responseTime}` : ''}. Si hace falta, coordinamos una reunión y luego te enviamos una propuesta por escrito.`
 
 function Channels() {
   const wa = CONTACT.whatsapp && `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(CONTACT.whatsappText)}`
   return (
     <ul className="channels" aria-label="Otros canales de contacto">
       {wa && (
-        <li>
-          <a href={wa} target="_blank" rel="noopener noreferrer">
-            <Icon name="i-chat" /><span><strong>WhatsApp</strong><small>Escríbenos directamente</small></span>
-          </a>
-        </li>
+        <li><a href={wa} target="_blank" rel="noopener noreferrer"><Icon name="i-chat" />WhatsApp</a></li>
       )}
-      <li>
-        <a href={`mailto:${CONTACT.email}`}>
-          <Icon name="i-mail" /><span><strong>Correo</strong><small>{CONTACT.email}</small></span>
-        </a>
-      </li>
-      <li>
-        <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer">
-          <Icon name="i-instagram" /><span><strong>Instagram</strong><small>@dta_next</small></span>
-        </a>
-      </li>
+      <li><a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer"><Icon name="i-instagram" />Instagram</a></li>
+      <li><a href={`mailto:${CONTACT.email}`}><Icon name="i-mail" />{CONTACT.email}</a></li>
     </ul>
   )
 }
@@ -108,24 +92,21 @@ export default function Contact({ service, onServiceChange, onOpenLegal, onBook 
       <div className="container contact__inner">
         <div className="contact__intro">
           <p className="eyebrow">Hablemos</p>
-          <h2 id="contacto-title">Conversemos sobre lo que tu empresa necesita.</h2>
-          <p className="lead">Escríbenos por el formulario o por WhatsApp. Si prefieres conversar, agenda una videollamada.</p>
+          <h2 id="contacto-title">Conversemos sobre tu proyecto.</h2>
+          <p className="lead">Escríbenos y te orientamos, aunque todavía no sepas qué necesitas.</p>
 
           <div className="book-card">
             <span className="book-card__icon"><Icon name="i-calendar" /></span>
             <div>
-              <h3>Agenda una reunión online</h3>
-              <p>{MEETING.minutes} minutos, sin costo. De {MEETING.days}, de {MEETING.hours}.</p>
+              <h3>¿Prefieres conversar?</h3>
+              <p>Videollamada de {MEETING.minutes} min, sin costo. Lunes a viernes, {MEETING.hours}.</p>
             </div>
-            <Button onClick={onBook}>Ver horarios</Button>
+            <Button onClick={onBook}>Agendar</Button>
           </div>
 
           <Channels />
 
-          <h3 className="contact__sub">Qué pasa después de escribirnos</h3>
-          <ol className="next-steps">
-            {NEXT_STEPS.map((t) => <li key={t}>{t}</li>)}
-          </ol>
+          <p className="contact__next"><Icon name="i-info" />{NEXT_STEP}</p>
         </div>
 
         <div className="form-card">
