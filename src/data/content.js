@@ -107,16 +107,32 @@ export const PRINCIPLES = [
   { icon: 'i-handshake', title: 'Comunicación directa', text: 'Hablas con quienes diseñan y desarrollan tu solución, sin intermediarios.' },
 ]
 
-export const FAQ = [
-  { q: '¿Cómo se define el presupuesto?', a: 'Consideramos la cantidad de procesos o pantallas, las integraciones con otras herramientas, el volumen de datos y el nivel de revisión humana que necesitas. Si el alcance es grande, proponemos partir por una primera etapa más acotada y cotizar el resto después.' },
-  { q: '¿Qué necesitan para cotizar?', a: 'Una descripción del problema, ejemplos de los documentos o pantallas que usas hoy, las herramientas involucradas y, si lo tienes, un plazo o rango de presupuesto. Con eso podemos dar una estimación o proponerte un diagnóstico si hace falta más información.' },
-  { q: '¿Cómo se manejan los cambios de alcance?', a: 'Si durante el proyecto aparece algo nuevo, lo evaluamos y te informamos por escrito su efecto en plazo y costo antes de hacerlo. Nada fuera de lo acordado se cobra sin tu aprobación.' },
-  { q: '¿Qué distingue una corrección de una mejora nueva?', a: 'Una corrección es algo que no funciona según lo acordado en la propuesta, y se resuelve sin costo durante el período de garantía definido. Una mejora es una funcionalidad o cambio que no estaba en el alcance, y se cotiza aparte.' },
-  { q: '¿Qué costos recurrentes pueden existir?', a: 'Según la solución: hosting, dominio, servicios de correo, APIs de inteligencia artificial o licencias de herramientas de terceros. Los identificamos en la propuesta, con un valor estimado, y en lo posible quedan a nombre de tu empresa.' },
-  { q: '¿Qué incluye el mantenimiento?', a: 'Puede ir desde soporte por incidencias y actualizaciones de seguridad hasta una bolsa de horas mensual para mejoras. Te proponemos la alternativa que calce con el uso real de la solución, y también puedes no contratarlo y operar con la documentación entregada.' },
-  { q: '¿Cómo se acuerda la entrega del código y los accesos?', a: 'En la propuesta definimos quién es dueño del código, en qué repositorio y cuentas queda y cómo se traspasan los accesos al cierre. Lo habitual es que la solución construida para ti quede a tu nombre.' },
-  { q: '¿Qué pasa con los datos que usa una automatización?', a: 'Usamos tus datos solo para construir y operar la solución acordada. Definimos dónde se almacenan, quién accede y qué servicios externos los procesan, y preferimos trabajar con datos de prueba o anonimizados durante el desarrollo.' },
-  { q: '¿Pueden integrar mis herramientas actuales?', a: 'Revisamos las APIs, permisos y posibilidades de integración de las herramientas que utilizas antes de definir la solución, y te decimos con claridad si algo no es posible o requiere un plan pagado.' },
+// Preguntas frecuentes agrupadas por tema.
+export const FAQ_GROUPS = [
+  {
+    id: 'precio', label: 'Cotización y alcance', icon: 'i-target',
+    items: [
+      { q: '¿Cómo se define el presupuesto?', a: 'Consideramos la cantidad de procesos o pantallas, las integraciones con otras herramientas, el volumen de datos y el nivel de revisión humana que necesitas. Si el alcance es grande, proponemos partir por una primera etapa más acotada y cotizar el resto después.' },
+      { q: '¿Qué necesitan para cotizar?', a: 'Una descripción del problema, ejemplos de los documentos o pantallas que usas hoy, las herramientas involucradas y, si lo tienes, un plazo o rango de presupuesto. Con eso podemos dar una estimación o proponerte un diagnóstico si hace falta más información.' },
+      { q: '¿Cómo se manejan los cambios de alcance?', a: 'Si durante el proyecto aparece algo nuevo, lo evaluamos y te informamos por escrito su efecto en plazo y costo antes de hacerlo. Nada fuera de lo acordado se cobra sin tu aprobación.' },
+    ],
+  },
+  {
+    id: 'proyecto', label: 'Soporte y costos', icon: 'i-handshake',
+    items: [
+      { q: '¿Qué distingue una corrección de una mejora nueva?', a: 'Una corrección es algo que no funciona según lo acordado en la propuesta, y se resuelve sin costo durante el período de garantía definido. Una mejora es una funcionalidad o cambio que no estaba en el alcance, y se cotiza aparte.' },
+      { q: '¿Qué incluye el mantenimiento?', a: 'Puede ir desde soporte por incidencias y actualizaciones de seguridad hasta una bolsa de horas mensual para mejoras. Te proponemos la alternativa que calce con el uso real de la solución, y también puedes no contratarlo y operar con la documentación entregada.' },
+      { q: '¿Qué costos recurrentes pueden existir?', a: 'Según la solución: hosting, dominio, servicios de correo, APIs de inteligencia artificial o licencias de herramientas de terceros. Los identificamos en la propuesta, con un valor estimado, y en lo posible quedan a nombre de tu empresa.' },
+    ],
+  },
+  {
+    id: 'codigo', label: 'Código, datos e integraciones', icon: 'i-code',
+    items: [
+      { q: '¿Cómo se acuerda la entrega del código y los accesos?', a: 'En la propuesta definimos quién es dueño del código, en qué repositorio y cuentas queda y cómo se traspasan los accesos al cierre. Lo habitual es que la solución construida para ti quede a tu nombre.' },
+      { q: '¿Qué pasa con los datos que usa una automatización?', a: 'Usamos tus datos solo para construir y operar la solución acordada. Definimos dónde se almacenan, quién accede y qué servicios externos los procesan, y preferimos trabajar con datos de prueba o anonimizados durante el desarrollo.' },
+      { q: '¿Pueden integrar mis herramientas actuales?', a: 'Revisamos las APIs, permisos y posibilidades de integración de las herramientas que utilizas antes de definir la solución, y te decimos con claridad si algo no es posible o requiere un plan pagado.' },
+    ],
+  },
 ]
 
 export const IMAGE_DEMOS = {

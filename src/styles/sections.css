@@ -147,7 +147,22 @@
 .principles h3 { font: 600 1.0625rem/1.3 var(--font-body); margin-bottom: 6px; }
 .principles p { color: var(--color-text-muted); font-size: .9375rem; }
 
-.faq { max-width: 880px; display: grid; gap: 12px; }
+.faq-layout { display: grid; gap: 40px; }
+@media (min-width: 1024px) { .faq-layout { grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; } .faq-aside { position: sticky; top: calc(var(--header-h) + 32px); } }
+.faq-aside .lead { margin-top: 16px; }
+.faq-help { margin-top: 32px; padding: 24px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.faq-help h3 { font: 700 1.125rem/1.3 var(--font-heading); }
+.faq-help p { color: var(--color-text-muted); font-size: .9375rem; margin-top: 4px; }
+.faq-help__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.faq-help__actions .button { min-height: 44px; padding: 8px 18px; font-size: .9375rem; }
+.faq-help__actions .icon { width: 18px; height: 18px; }
+.faq-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.faq-tabs button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: #fff; font: 600 .9375rem/1.2 var(--font-body); color: var(--brand-ink); cursor: pointer; transition: background-color var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast); }
+.faq-tabs button .icon { width: 18px; height: 18px; color: var(--brand-blue); }
+.faq-tabs button:hover { border-color: var(--brand-blue); }
+.faq-tabs button[aria-selected="true"] { background: var(--brand-ink); border-color: var(--brand-ink); color: #fff; }
+.faq-tabs button[aria-selected="true"] .icon { color: var(--brand-cyan); }
+.faq { display: grid; gap: 12px; }
 .faq-item { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; }
 .faq-item h3 { font: inherit; }
 .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; text-align: left; min-height: 56px; padding: 14px 20px; background: none; border: 0; border-radius: var(--radius-md); cursor: pointer; font: 600 1rem/1.4 var(--font-body); }

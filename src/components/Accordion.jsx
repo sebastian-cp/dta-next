@@ -1,9 +1,9 @@
 import { useId, useState } from 'react'
 import Icon from './Icon.jsx'
 
-function Item({ q, a }) {
+function Item({ q, a, defaultOpen = false }) {
   const id = useId()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(defaultOpen)
   return (
     <div className="faq-item">
       <h3>
@@ -17,6 +17,6 @@ function Item({ q, a }) {
   )
 }
 
-export default function Accordion({ items }) {
-  return <div className="faq">{items.map((it) => <Item key={it.q} {...it} />)}</div>
+export default function Accordion({ items, openFirst }) {
+  return <div className="faq">{items.map((it, i) => <Item key={it.q} {...it} defaultOpen={openFirst && i === 0} />)}</div>
 }

@@ -45,7 +45,7 @@ export default function App() {
         <Demos onQuote={goContact} />
         <Process onBook={goBook} />
         <About />
-        <Faq />
+        <Faq onBook={goBook} />
         <Contact service={contactService} onServiceChange={setContactService} onOpenLegal={setLegalDoc} onBook={goBook} />
       </main>
       <Footer onOpenLegal={setLegalDoc} onService={setServiceModal} onBook={goBook} />
