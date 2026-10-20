@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
+import DemoBrief from '../components/DemoBrief.jsx'
 import Modal, { ModalActions } from '../components/Modal.jsx'
 import { Chip } from '../components/ProductWindow.jsx'
 import { DOC_SAMPLE } from '../data/content.js'
@@ -69,8 +70,9 @@ export function DocsModal({ open, onClose, onQuote }) {
       <h2 id="dd-title">Asistente documental</h2>
       <div className="demo-banner">
         <Icon name="i-info" />
-        <span>Demostración con un documento de ejemplo ficticio. No se carga ni procesa ningún archivo real.</span>
+        <span>Prototipo interactivo con un documento ficticio y sin conexiones externas. No se carga ni procesa ningún archivo tuyo.</span>
       </div>
+      <DemoBrief id="docs" />
       <ol className="live-steps" aria-label="Progreso">
         {STEPS.map((s, i) => (
           <li key={s} className={`step${i === step ? ' is-on' : ''}${i < step || step === 3 ? ' is-done' : ''}`}><b>{i + 1}</b>{s}</li>

@@ -6,6 +6,8 @@
 //                   que solo permite enviar al correo dueño de la cuenta de Resend.
 //   DISCORD_WEBHOOK_URL  webhook del canal de Discord que recibe el aviso (opcional)
 
+import { isBookable, formatDay, TIMEZONE, SLOT_MINUTES } from '../src/data/schedule.js'
+
 const SERVICES = {
   ia: 'Automatización con IA',
   web: 'Sitios web',
@@ -38,22 +40,29 @@ export default async function handler(req, res) {
   const empresa = clean(body.empresa, 120)
   const servicio = clean(body.servicio, 40)
   const mensaje = clean(body.mensaje, 5000)
+  const reunion = body.tipo === 'reunion'
+  const fecha = clean(body.fecha, 10)
+  const hora = clean(body.hora, 5)
 
   const valid =
     nombre.length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo) &&
     servicio in SERVICES &&
-    mensaje.length >= 10
+    (reunion ? isBookable(fecha, hora) : mensaje.length >= 10)
   if (!valid) return res.status(400).json({ error: 'Datos inválidos.' })
 
+  // Las reuniones son solicitudes: el equipo confirma por correo y envía el enlace de la videollamada.
+  const cuando = reunion ? `${formatDay(fecha)} a las ${hora} (${SLOT_MINUTES} min, ${TIMEZONE})` : ''
+
   const html = `
-    <h2>Nueva consulta desde el sitio de DTA Next</h2>
+    <h2>${reunion ? 'Nueva solicitud de reunión' : 'Nueva consulta'} desde el sitio de DTA Next</h2>
+    ${reunion ? `<p><strong>Horario solicitado:</strong> ${esc(cuando)}</p>` : ''}
     <p><strong>Nombre:</strong> ${esc(nombre)}</p>
     <p><strong>Correo:</strong> ${esc(correo)}</p>
     <p><strong>Empresa:</strong> ${esc(empresa) || '—'}</p>
     <p><strong>Servicio de interés:</strong> ${esc(SERVICES[servicio])}</p>
     <p><strong>Mensaje:</strong></p>
-    <p style="white-space:pre-wrap">${esc(mensaje)}</p>`
+    <p style="white-space:pre-wrap">${esc(mensaje) || '—'}</p>`
 
   try {
     const r = await fetch('https://api.resend.com/emails', {
@@ -63,7 +72,9 @@ export default async function handler(req, res) {
         from: CONTACT_FROM || 'DTA Next <onboarding@resend.dev>',
         to: [CONTACT_TO],
         reply_to: correo,
-        subject: `Consulta web: ${SERVICES[servicio]} — ${nombre}`.replace(/[\r\n]+/g, ' '),
+        subject: (reunion
+          ? `Solicitud de reunión: ${fecha} ${hora} — ${nombre}`
+          : `Consulta web: ${SERVICES[servicio]} — ${nombre}`).replace(/[\r\n]+/g, ' '),
         html,
       }),
     })
@@ -71,7 +82,7 @@ export default async function handler(req, res) {
       console.error('Resend respondió', r.status, await r.text())
       return res.status(502).json({ error: 'No se pudo enviar.' })
     }
-    await notifyDiscord({ nombre, correo, empresa, servicio: SERVICES[servicio], mensaje })
+    await notifyDiscord({ nombre, correo, empresa, servicio: SERVICES[servicio], mensaje, cuando })
     return res.status(200).json({ ok: true })
   } catch (err) {
     console.error('Error al llamar a Resend', err)
@@ -80,19 +91,20 @@ export default async function handler(req, res) {
 }
 
 // Aviso al canal de Discord. Si falla, solo se registra: el correo ya se envió.
-async function notifyDiscord({ nombre, correo, empresa, servicio, mensaje }) {
+async function notifyDiscord({ nombre, correo, empresa, servicio, mensaje, cuando }) {
   const url = process.env.DISCORD_WEBHOOK_URL
   if (!url) return
   const payload = {
     allowed_mentions: { parse: [] },
     embeds: [{
-      title: `Nueva consulta: ${servicio}`,
+      title: cuando ? `Solicitud de reunión: ${servicio}` : `Nueva consulta: ${servicio}`,
       color: 0x2563eb,
       fields: [
         { name: 'Nombre', value: nombre, inline: true },
         { name: 'Correo', value: correo, inline: true },
         { name: 'Empresa', value: empresa || '—', inline: true },
-        { name: 'Mensaje', value: mensaje.slice(0, 1000) },
+        ...(cuando ? [{ name: 'Horario solicitado', value: cuando }] : []),
+        { name: 'Mensaje', value: mensaje.slice(0, 1000) || '—' },
       ],
       timestamp: new Date().toISOString(),
     }],

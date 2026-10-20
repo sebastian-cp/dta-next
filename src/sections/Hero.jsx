@@ -2,7 +2,7 @@ import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
 import { MockToolbar, Chip } from '../components/ProductWindow.jsx'
 
-const POINTS = ['Alcance definido', 'Pruebas funcionales', 'Documentación']
+const POINTS = ['Reunión inicial sin costo', 'Alcance por escrito', 'Documentación incluida']
 
 const REQUESTS = [
   { icon: 'i-file', ok: false, title: 'Solicitud recibida', sub: 'Formulario web', tone: 'ok', label: 'Completado' },
@@ -10,7 +10,7 @@ const REQUESTS = [
   { icon: 'i-users', ok: false, title: 'Listo para revisión', sub: 'Asignado al equipo', tone: 'wait', label: 'Pendiente' },
 ]
 
-export default function Hero() {
+export default function Hero({ onBook }) {
   return (
     <section className="hero on-dark" id="inicio" aria-labelledby="hero-title">
       <div className="container hero__inner">
@@ -21,7 +21,7 @@ export default function Hero() {
           </h1>
           <p className="lead">Sitios web, aplicaciones a medida e inteligencia artificial conectadas a las necesidades de tu empresa.</p>
           <div className="hero__actions">
-            <Button href="#contacto">Cuéntanos tu proyecto</Button>
+            <Button href="#agendar" onClick={(e) => { e.preventDefault(); onBook() }}><Icon name="i-calendar" />Agenda una reunión</Button>
             <Button href="#demos" variant="secondary-dark">Explorar demos</Button>
           </div>
           <ul className="hero__points" aria-label="Lo que incluye cada proyecto">

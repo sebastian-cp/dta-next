@@ -127,15 +127,8 @@
 .extract dd { margin: 0; font-weight: 500; }
 
 /* ============================================================
-   ENTREGABLES / PROCESO
+   PROCESO
    ============================================================ */
-.deliver { display: grid; gap: 32px; }
-@media (min-width: 640px)  { .deliver { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .deliver { grid-template-columns: repeat(4, 1fr); } }
-.deliver .icon { width: 36px; height: 36px; color: var(--brand-blue); margin-bottom: 16px; }
-.deliver h3 { font: 600 1.0625rem/1.3 var(--font-body); margin-bottom: 6px; }
-.deliver p { color: var(--color-text-muted); font-size: .9375rem; }
-
 .steps { display: grid; gap: 32px; counter-reset: s; }
 @media (min-width: 768px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
 .steps li { position: relative; }
@@ -147,16 +140,9 @@
 /* ============================================================
    NOSOTROS / FAQ
    ============================================================ */
-.about { display: grid; gap: 40px; align-items: start; }
-@media (min-width: 1024px) { .about { grid-template-columns: 7fr 5fr; gap: 64px; } }
-.about .lead { margin-top: 20px; }
-.mv { display: grid; gap: 16px; }
-.mv__item { background: var(--brand-mist); border: 1px solid var(--color-border); border-left: 4px solid var(--brand-blue); border-radius: var(--radius-md); padding: 24px; }
-.mv__item h3 { font: 600 .8125rem/1.4 var(--font-body); text-transform: uppercase; letter-spacing: .08em; color: var(--brand-blue); margin-bottom: 8px; }
-.mv__item p { font-size: 1.0625rem; line-height: 1.55; }
-.principles { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--color-border); display: grid; gap: 32px; }
+.principles { display: grid; gap: 32px; }
 @media (min-width: 640px)  { .principles { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .principles { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .principles { grid-template-columns: repeat(3, 1fr); gap: 40px 48px; } }
 .principles .icon { width: 28px; height: 28px; color: var(--brand-blue); margin-bottom: 12px; }
 .principles h3 { font: 600 1.0625rem/1.3 var(--font-body); margin-bottom: 6px; }
 .principles p { color: var(--color-text-muted); font-size: .9375rem; }
@@ -272,12 +258,60 @@
   .hero .ops__main { padding-bottom: 64px; }
 }
 
-/* Formas de trabajar */
-.engagements { display: grid; gap: 24px; }
-@media (min-width: 640px)  { .engagements { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .engagements { grid-template-columns: repeat(4, 1fr); } }
-.engagement { padding: 28px; box-shadow: none; }
-.engagement .icon { width: 32px; height: 32px; color: var(--brand-blue); margin-bottom: 16px; }
-.engagement h3 { font: 600 1.125rem/1.3 var(--font-body); margin-bottom: 8px; }
-.engagement p { color: var(--color-text-muted); font-size: .9375rem; }
-.engagements__cta { margin-top: 40px; }
+/* Proceso de 5 pasos y primera oferta (diagnóstico) */
+@media (min-width: 1024px) { .steps--5 { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 768px) and (max-width: 1023px) { .steps--5 { grid-template-columns: repeat(3, 1fr); } .steps--5 li::after { display: none; } }
+.offer { margin-top: 56px; padding: 28px; box-shadow: none; }
+@media (min-width: 768px) { .offer { padding: 40px; } }
+.offer__head { max-width: 760px; }
+.offer__head h3 { font: 700 1.5rem/1.25 var(--font-heading); margin: 12px 0 8px; }
+.offer__head p:not(.tag) { color: var(--color-text-muted); }
+.offer__grid { display: grid; gap: 24px; margin-top: 32px; }
+@media (min-width: 768px) { .offer__grid { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
+.offer__grid h4 { font: 600 .8125rem/1.4 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-muted); }
+.offer__grid .checks { margin: 12px 0 0; }
+.offer__foot { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+.offer__foot p { display: flex; gap: 10px; align-items: flex-start; max-width: 60ch; font-size: .9375rem; }
+.offer__foot .icon { color: var(--brand-blue); margin-top: 1px; }
+
+/* Contexto de las demos */
+.demo__lead { color: #fff !important; font-weight: 500; }
+.demo__info { margin: 8px 0 4px; display: grid; gap: 8px; font-size: .9375rem; }
+.demo__info dt { font: 600 .75rem/1.4 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--brand-cyan); }
+.demo__info dd { margin: 0; color: var(--color-text-inverse-muted); }
+.demo-brief { border: 1px solid var(--color-border); border-radius: var(--radius-md); margin: 0 0 20px; background: #fff; }
+.demo-brief summary { cursor: pointer; padding: 12px 16px; font-weight: 600; font-size: .9375rem; color: var(--brand-blue); min-height: 44px; display: flex; align-items: center; }
+.demo-brief[open] summary { border-bottom: 1px solid var(--color-border); }
+.demo-brief dl { margin: 0; padding: 16px; display: grid; gap: 12px; }
+@media (min-width: 768px) { .demo-brief dl { grid-template-columns: repeat(2, 1fr); gap: 16px 32px; } .demo-brief dl > div:last-child { grid-column: span 2; } }
+.demo-brief dt { font: 600 .75rem/1.4 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-muted); }
+.demo-brief dd { margin: 2px 0 0; font-size: .9375rem; }
+
+/* Contacto: siguientes pasos, canales directos y agenda */
+.contact__sub { font: 600 .875rem/1.4 var(--font-body); text-transform: uppercase; letter-spacing: .08em; margin: 32px 0 12px; opacity: .9; }
+.next-steps { counter-reset: n; display: grid; gap: 10px; }
+.next-steps li { counter-increment: n; display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+.next-steps li::before { content: counter(n); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 16%); font: 700 .8125rem/1 var(--font-heading); margin-top: 1px; }
+.channels { display: grid; gap: 10px; margin-top: 32px; }
+.channels a { display: flex; gap: 14px; align-items: center; padding: 12px 16px; border: 1px solid rgb(255 255 255 / 35%); border-radius: var(--radius-md); text-decoration: none; transition: background-color var(--duration-fast); min-height: 56px; }
+.channels a:hover { background: rgb(255 255 255 / 10%); }
+.channels strong { display: block; font-size: .9375rem; line-height: 1.3; }
+.channels small { display: block; font-size: .875rem; opacity: .85; overflow-wrap: anywhere; }
+.form-card .seg--tabs { display: flex; margin-bottom: 24px; }
+.form-card .seg--tabs button { flex: 1; min-height: 44px; white-space: nowrap; padding-inline: 8px; }
+.form-intro { font-size: .9375rem; color: var(--color-text-muted); }
+.slot-picker { display: grid; gap: 20px; }
+.slot-picker fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.slot-picker legend { font: 600 .875rem/1.4 var(--font-body); margin-bottom: 8px; padding: 0; }
+.slot-picker legend .opt { font-weight: 400; color: var(--color-text-muted); }
+.slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
+.slot-grid--days { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+.slot-grid button { min-height: 44px; padding: 6px 8px; border: 1px solid var(--color-control-border); border-radius: var(--radius-sm); background: #fff; cursor: pointer; font: 600 .875rem/1.2 var(--font-body); color: var(--brand-ink); transition: background-color var(--duration-fast), border-color var(--duration-fast); }
+.slot-grid--days button { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.slot-grid--days span { font-weight: 500; font-size: .75rem; color: var(--color-text-muted); text-transform: capitalize; }
+.slot-grid button:hover { border-color: var(--brand-blue); background: rgb(36 87 255 / 6%); }
+.slot-grid button[aria-pressed="true"] { background: var(--brand-blue); border-color: var(--brand-blue); color: #fff; }
+.slot-grid button[aria-pressed="true"] span { color: #fff; }
+.slot-hint { font-size: .9375rem; color: var(--color-text-muted); }
+.slot-picker .err { display: flex; gap: 6px; align-items: flex-start; color: var(--color-error); font-size: .875rem; margin-top: 6px; }
+.slot-picker .err .icon { width: 16px; height: 16px; margin-top: 3px; }
