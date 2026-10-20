@@ -16,6 +16,7 @@ export const LEGAL = {
         title: '2. Datos que recopilamos',
         items: [
           'Formulario de contacto: nombre, correo electrónico, empresa (opcional), servicio de interés y el mensaje que escribas.',
+          'Solicitud de reunión: además de los datos anteriores, el día y el horario que elijas para la videollamada.',
           'Analítica de visitas: datos técnicos agregados, como páginas visitadas, país, tipo de dispositivo y navegador, mediante Vercel Analytics. Según la documentación de Vercel, funciona sin cookies y sin identificar personalmente a los visitantes.',
         ],
       },

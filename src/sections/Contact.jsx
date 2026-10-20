@@ -2,27 +2,46 @@ import { useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
 import FormField from '../components/FormField.jsx'
-import { SERVICE_OPTIONS } from '../data/content.js'
+import { SERVICE_OPTIONS, CONTACT, MEETING } from '../data/content.js'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 const RULES = {
   nombre: (v) => (v.trim().length < 2 ? 'Ingresa tu nombre.' : ''),
   correo: (v) => {
     if (!v.trim()) return 'Ingresa tu correo.'
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Revisa el formato del correo, por ejemplo nombre@empresa.cl.'
+    return EMAIL_RE.test(v.trim()) ? '' : 'Revisa el formato del correo, por ejemplo nombre@empresa.cl.'
   },
   servicio: (v) => (!v ? 'Selecciona un servicio de interés.' : ''),
   mensaje: (v) => (v.trim().length < 10 ? 'Cuéntanos un poco más sobre tu proyecto (al menos 10 caracteres).' : ''),
 }
 
-export default function Contact({ service, onServiceChange, onOpenLegal }) {
-  const [values, setValues] = useState({ nombre: '', correo: '', empresa: '', mensaje: '' })
+const EMPTY = { nombre: '', correo: '', empresa: '', mensaje: '' }
+
+const NEXT_STEP = `Respondemos por correo${CONTACT.responseTime ? ` ${CONTACT.responseTime}` : ''}. Si hace falta, coordinamos una reunión y luego te enviamos una propuesta por escrito.`
+
+function Channels() {
+  const wa = CONTACT.whatsapp && `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(CONTACT.whatsappText)}`
+  return (
+    <ul className="channels" aria-label="Otros canales de contacto">
+      {wa && (
+        <li><a href={wa} target="_blank" rel="noopener noreferrer"><Icon name="i-chat" />WhatsApp</a></li>
+      )}
+      <li><a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer"><Icon name="i-instagram" />Instagram</a></li>
+      <li><a href={`mailto:${CONTACT.email}`}><Icon name="i-mail" />{CONTACT.email}</a></li>
+    </ul>
+  )
+}
+
+export default function Contact({ service, onServiceChange, onOpenLegal, onBook }) {
+  const [values, setValues] = useState(EMPTY)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [website, setWebsite] = useState('') // campo trampa anti-bots
 
   const get = (name) => (name === 'servicio' ? service : values[name])
   const validate = (name) => {
-    const msg = RULES[name](get(name))
+    const msg = RULES[name] ? RULES[name](get(name)) : ''
     setErrors((e) => ({ ...e, [name]: msg }))
     return !msg
   }
@@ -31,9 +50,8 @@ export default function Contact({ service, onServiceChange, onOpenLegal }) {
     if (name === 'servicio') onServiceChange(v)
     else setValues((s) => ({ ...s, [name]: v }))
     if (status !== 'sending') setStatus('idle')
-    if (errors[name]) setErrors((er) => ({ ...er, [name]: RULES[name](v) }))
+    if (errors[name] && RULES[name]) setErrors((er) => ({ ...er, [name]: RULES[name](v) }))
   }
-
   const onSubmit = async (e) => {
     e.preventDefault()
     if (status === 'sending') return
@@ -52,7 +70,7 @@ export default function Contact({ service, onServiceChange, onOpenLegal }) {
       })
       if (!res.ok) throw new Error(String(res.status))
       // Éxito solo tras la confirmación del servidor.
-      setValues({ nombre: '', correo: '', empresa: '', mensaje: '' })
+      setValues(EMPTY)
       onServiceChange('')
       setErrors({})
       setStatus('success')
@@ -72,13 +90,27 @@ export default function Contact({ service, onServiceChange, onOpenLegal }) {
   return (
     <section className="contact" id="contacto" aria-labelledby="contacto-title">
       <div className="container contact__inner">
-        <div>
+        <div className="contact__intro">
           <p className="eyebrow">Hablemos</p>
-          <h2 id="contacto-title">Conversemos sobre lo que tu empresa necesita.</h2>
-          <p className="lead">Cuéntanos el problema o la idea que quieres desarrollar.</p>
+          <h2 id="contacto-title">Conversemos sobre tu proyecto.</h2>
+          <p className="lead">Escríbenos y te orientamos, aunque todavía no sepas qué necesitas.</p>
+
+          <div className="book-card">
+            <span className="book-card__icon"><Icon name="i-calendar" /></span>
+            <div>
+              <h3>¿Prefieres conversar?</h3>
+              <p>Videollamada de {MEETING.minutes} min, sin costo. Lunes a viernes, {MEETING.hours}.</p>
+            </div>
+            <Button onClick={onBook}>Agendar</Button>
+          </div>
+
+          <Channels />
+
+          <p className="contact__next"><Icon name="i-info" />{NEXT_STEP}</p>
         </div>
 
         <div className="form-card">
+          <h3 className="form-card__title">Envíanos tu consulta</h3>
           <form onSubmit={onSubmit} noValidate>
             <div className="form-grid">
               <FormField {...field('nombre')} label="Nombre" type="text" autoComplete="name" required placeholder="Tu nombre" />

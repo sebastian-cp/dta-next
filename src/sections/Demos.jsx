@@ -4,9 +4,10 @@ import { PanelModal, PanelPreview } from '../demos/RequestsPanel.jsx'
 import { AutomationPreview, AutomationModal } from '../demos/AutomationFlow.jsx'
 import { DocsPreview, DocsModal } from '../demos/DocsDemo.jsx'
 import { ImagePreview, ImageModal } from '../demos/ImageDemo.jsx'
-import { IMAGE_DEMOS } from '../data/content.js'
+import { IMAGE_DEMOS, DEMO_INFO } from '../data/content.js'
 
-function DemoCard({ title, label, caption, onOpen, badge = 'Demo', children }) {
+function DemoCard({ id, title, label, caption, onOpen, badge = 'Demo', children }) {
+  const info = DEMO_INFO[id]
   return (
     <article>
       <div className="window demo-win" role="img" aria-label={label}>
@@ -17,7 +18,11 @@ function DemoCard({ title, label, caption, onOpen, badge = 'Demo', children }) {
         {children}
       </div>
       <div className="demo__caption">
-        <p>{caption}</p>
+        <p className="demo__lead">{caption}</p>
+        <dl className="demo__info">
+          <div><dt>Problema</dt><dd>{info.problema}</dd></div>
+          <div><dt>Resultado esperado</dt><dd>{info.beneficio}</dd></div>
+        </dl>
         <button className="link" type="button" onClick={onOpen}>
           Ver demo <Icon name="i-arrow" size="sm" /><span className="sr-only">: {title}</span>
         </button>
@@ -37,10 +42,11 @@ export default function Demos({ onQuote }) {
         <div className="section-head">
           <p className="eyebrow">Demos</p>
           <h2 id="demos-title">Así puede verse tu próxima solución.</h2>
-          <p className="lead">Conceptos ilustrativos de soluciones que podemos desarrollar. Pruébalos: son interactivos y usan datos ficticios.</p>
+          <p className="lead">Prototipos interactivos de soluciones que podemos desarrollar, con datos ficticios y sin conexiones externas. Cada uno muestra un problema real de operación y cómo lo abordaríamos.</p>
         </div>
         <div className="demos">
           <DemoCard
+            id="panel"
             title="Panel de solicitudes"
             label="Vista previa de un panel de solicitudes con estados: por revisar, asignada, agendada y cerrada"
             caption="Filtra, revisa y aprueba respuestas en un solo lugar."
@@ -49,6 +55,7 @@ export default function Demos({ onQuote }) {
             <PanelPreview />
           </DemoCard>
           <DemoCard
+            id="automation"
             title="Automatización paso a paso"
             label="Vista previa de un flujo automatizado: correo recibido, clasificar, extraer datos, validar y registrar"
             caption="Del correo entrante al registro, con una persona cuando hace falta."
@@ -57,6 +64,7 @@ export default function Demos({ onQuote }) {
             <AutomationPreview />
           </DemoCard>
           <DemoCard
+            id="docs"
             title="Asistente documental"
             label="Vista previa de un asistente documental: cargar, procesar, revisar y exportar"
             caption="Información organizada, con revisión humana."
@@ -65,6 +73,7 @@ export default function Demos({ onQuote }) {
             <DocsPreview />
           </DemoCard>
           <DemoCard
+            id="web"
             title="Sitio web de ejemplo"
             badge="Vista previa"
             label={IMAGE_DEMOS.web.alt}

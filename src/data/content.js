@@ -1,7 +1,9 @@
+import { CONTACT_EMAIL } from './legal.js'
+
 export const NAV = [
   { href: '#soluciones', label: 'Soluciones' },
   { href: '#demos', label: 'Demos' },
-  { href: '#como-trabajamos', label: 'Cómo trabajamos' },
+  { href: '#como-trabajamos', label: 'Cómo empezamos' },
   { href: '#nosotros', label: 'Nosotros' },
 ]
 
@@ -48,42 +50,89 @@ export const SERVICE_OPTIONS = [
   { value: 'orientacion', label: 'Necesito orientación' },
 ]
 
-export const ENGAGEMENTS = [
-  { icon: 'i-search', title: 'Diagnóstico inicial', text: 'Revisamos tu proceso y definimos qué conviene construir, con un plan y un alcance claros.' },
-  { icon: 'i-target', title: 'Proyecto con alcance definido', text: 'Entregables, plazos y condiciones acordados por escrito antes de comenzar.' },
-  { icon: 'i-repeat', title: 'Desarrollo por etapas', text: 'Avanzamos en entregas parciales que validamos contigo, ajustando el rumbo en el camino.' },
-  { icon: 'i-handshake', title: 'Mejoras y mantención', text: 'Soporte y evolución de la solución, con condiciones definidas en la propuesta.' },
-]
+// Canales de contacto directo. `whatsapp`: solo dígitos con código de país; si se deja vacío, el botón no se muestra.
+export const CONTACT = {
+  email: CONTACT_EMAIL,
+  whatsapp: '56927640931',
+  whatsappText: 'Hola, vengo desde el sitio de DTA Next y quiero hacer una consulta.',
+  instagram: 'https://www.instagram.com/dta_next/',
+  responseTime: 'dentro de 1 a 2 días hábiles',
+}
 
-export const DELIVERABLES = [
-  { icon: 'i-target', title: 'Alcance definido', text: 'Objetivos claros, entregables y plazos acordados por escrito.' },
-  { icon: 'i-check-circle', title: 'Pruebas funcionales', text: 'Validamos que todo funcione según lo esperado antes de entregar.' },
-  { icon: 'i-doc', title: 'Documentación', text: 'Entregamos documentación técnica y de uso de la solución.' },
-  { icon: 'i-handshake', title: 'Acompañamiento acordado', text: 'Te apoyamos en la puesta en marcha, según lo definido en el proyecto.' },
-]
+export const MEETING = {
+  minutes: 30,
+  days: 'lunes a viernes',
+  hours: '08:00 a 18:00',
+  timezone: 'hora de Chile continental',
+}
+
+// Primera oferta acotada.
+// PENDIENTE: definir si el diagnóstico tiene costo y su valor; hoy solo se indica que se informa antes de comenzar.
+export const DIAGNOSTIC = {
+  title: 'Diagnóstico de un proceso',
+  lead: 'Una forma acotada de empezar: revisamos un proceso concreto de tu empresa y te entregamos un mapa de cómo funciona hoy, qué conviene mejorar y cómo lo implementaríamos.',
+  needs: [
+    'Una descripción del proceso y de quiénes participan en él.',
+    'Ejemplos de los documentos, correos o planillas que se usan (pueden ser anonimizados).',
+    'Las herramientas que utilizas hoy y qué accesos podrías habilitar.',
+    'Una o dos reuniones online con quien conoce el proceso.',
+  ],
+  delivers: [
+    'Mapa del flujo actual, paso a paso.',
+    'Oportunidades de mejora priorizadas, con lo que conviene automatizar y lo que no.',
+    'Propuesta de implementación con alcance, etapas y estimación.',
+  ],
+  excludes: [
+    'Desarrollo o implementación de la solución.',
+    'Cambios en tus sistemas o herramientas.',
+    'Revisión de más de un proceso, salvo que lo acordemos.',
+  ],
+  cost: 'La reunión inicial no tiene costo. El valor del diagnóstico, si corresponde, se informa por escrito antes de comenzar.',
+}
 
 export const STEPS = [
-  { n: '01', title: 'Entendemos', text: 'Conversamos sobre tu negocio, desafíos y objetivos.' },
-  { n: '02', title: 'Diseñamos', text: 'Proponemos una solución técnica y un plan de trabajo.' },
-  { n: '03', title: 'Construimos', text: 'Desarrollamos, iteramos y validamos contigo.' },
-  { n: '04', title: 'Implementamos', text: 'Desplegamos la solución y acompañamos su puesta en marcha.' },
+  { n: '01', title: 'Reunión inicial', text: `Una videollamada de ${MEETING.minutes} minutos, sin costo, para entender tu caso y ver si podemos ayudarte.` },
+  { n: '02', title: 'Diagnóstico', text: 'Si el problema necesita más análisis, revisamos el proceso y te entregamos un mapa, mejoras y una propuesta.' },
+  { n: '03', title: 'Propuesta por escrito', text: 'Alcance, entregables, plazos, lo que queda fuera y condiciones de soporte, antes de comenzar.' },
+  { n: '04', title: 'Desarrollo por etapas', text: 'Entregas parciales que validas. Si cambia el alcance, lo evaluamos y cotizamos antes de seguir.' },
+  { n: '05', title: 'Entrega y puesta en marcha', text: 'Pruebas, documentación, traspaso de accesos y el acompañamiento acordado.' },
 ]
-
-export const MISSION = 'Ayudar a empresas en Chile a simplificar su operación con software y automatización, partiendo siempre por entender su negocio.'
-export const VISION = 'Ser la consultora a la que una empresa acude cuando necesita una solución tecnológica clara, bien definida y que pueda usar y mantener.'
 
 export const PRINCIPLES = [
-  { icon: 'i-repeat', title: 'Entregas ágiles', text: 'Avanzamos por etapas y validamos contigo en cada una, para llegar pronto a una solución que funcione.' },
-  { icon: 'i-target', title: 'Cotización a tu medida', text: 'Adaptamos la propuesta al alcance, las integraciones y las condiciones de cada proyecto.' },
-  { icon: 'i-doc', title: 'Documentación clara', text: 'Cada entrega incluye la documentación técnica y de uso que tu equipo necesita.' },
-  { icon: 'i-handshake', title: 'Comunicación directa', text: 'Hablas con quien diseña y desarrolla tu solución, sin intermediarios.' },
+  { icon: 'i-target', title: 'Todo por escrito', text: 'Alcance, entregables, plazos y exclusiones quedan acordados antes de comenzar.' },
+  { icon: 'i-code', title: 'Código y accesos claros', text: 'La propiedad del código, las cuentas y los accesos se definen en la propuesta, sin letra chica.' },
+  { icon: 'i-doc', title: 'Documentación incluida', text: 'Cada entrega incluye la documentación técnica y de uso que tu equipo necesita para operar.' },
+  { icon: 'i-check-circle', title: 'Confidencialidad', text: 'Tratamos tu información solo para el proyecto y podemos firmar un acuerdo de confidencialidad.' },
+  { icon: 'i-users', title: 'Revisión humana', text: 'En las automatizaciones con IA, una persona revisa los casos que lo requieren y cada paso queda registrado.' },
+  { icon: 'i-handshake', title: 'Comunicación directa', text: 'Hablas con quienes diseñan y desarrollan tu solución, sin intermediarios.' },
 ]
 
-export const FAQ = [
-  { q: '¿Cómo se define el presupuesto?', a: 'Evaluamos el alcance, las integraciones y la complejidad del proyecto para preparar una propuesta con entregables y condiciones claras.' },
-  { q: '¿Pueden integrar mis herramientas actuales?', a: 'Revisamos las APIs, permisos y posibilidades de integración de las herramientas que utilizas antes de definir la solución.' },
-  { q: '¿Qué incluye el mantenimiento?', a: 'El soporte y mantenimiento se acuerdan según las necesidades del proyecto y se detallan en la propuesta.' },
-  { q: '¿Cómo se acuerda la entrega del código?', a: 'La entrega del código, los accesos y las condiciones de uso se definen expresamente en la propuesta y el contrato.' },
+// Preguntas frecuentes agrupadas por tema.
+export const FAQ_GROUPS = [
+  {
+    id: 'precio', label: 'Cotización y alcance', icon: 'i-target',
+    items: [
+      { q: '¿Cómo se define el presupuesto?', a: 'Consideramos la cantidad de procesos o pantallas, las integraciones con otras herramientas, el volumen de datos y el nivel de revisión humana que necesitas. Si el alcance es grande, proponemos partir por una primera etapa más acotada y cotizar el resto después.' },
+      { q: '¿Qué necesitan para cotizar?', a: 'Una descripción del problema, ejemplos de los documentos o pantallas que usas hoy, las herramientas involucradas y, si lo tienes, un plazo o rango de presupuesto. Con eso podemos dar una estimación o proponerte un diagnóstico si hace falta más información.' },
+      { q: '¿Cómo se manejan los cambios de alcance?', a: 'Si durante el proyecto aparece algo nuevo, lo evaluamos y te informamos por escrito su efecto en plazo y costo antes de hacerlo. Nada fuera de lo acordado se cobra sin tu aprobación.' },
+    ],
+  },
+  {
+    id: 'proyecto', label: 'Soporte y costos', icon: 'i-handshake',
+    items: [
+      { q: '¿Qué distingue una corrección de una mejora nueva?', a: 'Una corrección es algo que no funciona según lo acordado en la propuesta, y se resuelve sin costo durante el período de garantía definido. Una mejora es una funcionalidad o cambio que no estaba en el alcance, y se cotiza aparte.' },
+      { q: '¿Qué incluye el mantenimiento?', a: 'Puede ir desde soporte por incidencias y actualizaciones de seguridad hasta una bolsa de horas mensual para mejoras. Te proponemos la alternativa que calce con el uso real de la solución, y también puedes no contratarlo y operar con la documentación entregada.' },
+      { q: '¿Qué costos recurrentes pueden existir?', a: 'Según la solución: hosting, dominio, servicios de correo, APIs de inteligencia artificial o licencias de herramientas de terceros. Los identificamos en la propuesta, con un valor estimado, y en lo posible quedan a nombre de tu empresa.' },
+    ],
+  },
+  {
+    id: 'codigo', label: 'Código, datos e integraciones', icon: 'i-code',
+    items: [
+      { q: '¿Cómo se acuerda la entrega del código y los accesos?', a: 'En la propuesta definimos quién es dueño del código, en qué repositorio y cuentas queda y cómo se traspasan los accesos al cierre. Lo habitual es que la solución construida para ti quede a tu nombre.' },
+      { q: '¿Qué pasa con los datos que usa una automatización?', a: 'Usamos tus datos solo para construir y operar la solución acordada. Definimos dónde se almacenan, quién accede y qué servicios externos los procesan, y preferimos trabajar con datos de prueba o anonimizados durante el desarrollo.' },
+      { q: '¿Pueden integrar mis herramientas actuales?', a: 'Revisamos las APIs, permisos y posibilidades de integración de las herramientas que utilizas antes de definir la solución, y te decimos con claridad si algo no es posible o requiere un plan pagado.' },
+    ],
+  },
 ]
 
 export const IMAGE_DEMOS = {
@@ -103,4 +152,36 @@ export const DOC_SAMPLE = {
   Fecha: '12 de marzo de 2024',
   Proveedor: 'Servicios SpA',
   Monto: 'UF 150',
+}
+
+// Contexto comercial de cada demo: qué problema resuelve, para quién, qué se prueba y qué haría falta en una implementación real.
+export const DEMO_INFO = {
+  panel: {
+    problema: 'Las consultas llegan por correo, formulario y WhatsApp, y se pierde el seguimiento de cada una.',
+    usuario: 'Quien coordina las solicitudes y las asigna a responsables.',
+    prueba: 'Filtrar, asignar un responsable, cambiar estados y revisar una respuesta antes de aprobarla.',
+    beneficio: 'Todos los pendientes visibles en un solo lugar y menos seguimiento disperso.',
+    alcance: 'Las solicitudes y respuestas son ficticias. Una implementación real se conecta a tus canales de entrada y a tu correo, con usuarios y permisos.',
+  },
+  automation: {
+    problema: 'Alguien lee cada correo entrante, identifica de qué se trata y copia los datos a mano en una planilla o sistema.',
+    usuario: 'El equipo administrativo u operativo que procesa esos correos.',
+    prueba: 'Elegir un caso y ver cómo se clasifica, qué datos se extraen, qué se valida y cuándo interviene una persona.',
+    beneficio: 'Menos digitación repetitiva y casos dudosos derivados a revisión en vez de registrarse con errores.',
+    alcance: 'Los resultados están predefinidos y no se usa IA real. Una implementación real usa un modelo de IA, reglas de validación acordadas y la conexión a tu correo y tus registros.',
+  },
+  docs: {
+    problema: 'Contratos, facturas o formularios se revisan uno a uno para obtener los mismos datos.',
+    usuario: 'Quien recibe documentos y necesita registrar su información.',
+    prueba: 'Cargar un documento de ejemplo, ver los datos extraídos, corregirlos y exportar el resultado.',
+    beneficio: 'Información estructurada lista para usar, con una persona que confirma cada dato.',
+    alcance: 'Se usa un documento de ejemplo y no se procesa ningún archivo. Una implementación real lee tus formatos de documento y exporta a tu planilla o sistema.',
+  },
+  web: {
+    problema: 'Un negocio con un buen servicio, pero sin una presencia digital que lo explique y facilite el contacto.',
+    usuario: 'Los clientes potenciales que buscan el servicio y quieren escribir o cotizar.',
+    prueba: 'Recorrer la portada, los proyectos destacados y el llamado a contacto.',
+    beneficio: 'Un sitio claro y rápido que presenta el servicio y recibe consultas.',
+    alcance: 'Es una imagen conceptual de un estudio ficticio. Un sitio real incluye tu contenido, formulario de contacto, adaptación a móvil y configuración técnica de SEO.',
+  },
 }

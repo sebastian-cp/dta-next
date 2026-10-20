@@ -1,20 +1,14 @@
 import Icon from '../components/Icon.jsx'
-import { MISSION, VISION, PRINCIPLES } from '../data/content.js'
+import { PRINCIPLES } from '../data/content.js'
 
 export default function About() {
   return (
     <section id="nosotros" aria-labelledby="nosotros-title">
       <div className="container">
-        <div className="about">
-          <div>
-            <p className="eyebrow">Sobre DTA Next</p>
-            <h2 id="nosotros-title">Trato directo. Criterio técnico.</h2>
-            <p className="lead">En DTA Next, un equipo de profesionales diseña, desarrolla e implementa soluciones a medida. Cada proyecto parte de entender tu negocio y definir una solución viable.</p>
-          </div>
-          <div className="mv">
-            <div className="mv__item"><h3>Misión</h3><p>{MISSION}</p></div>
-            <div className="mv__item"><h3>Visión</h3><p>{VISION}</p></div>
-          </div>
+        <div className="section-head">
+          <p className="eyebrow">Sobre DTA Next</p>
+          <h2 id="nosotros-title">Lo que puedes esperar al trabajar con nosotros.</h2>
+          <p className="lead">DTA Next es una consultora tecnológica chilena que diseña, desarrolla e implementa software y automatización a medida. Nuestro foco es ayudar a empresas a simplificar su operación, partiendo siempre por entender su negocio.</p>
         </div>
 
         <div className="principles">

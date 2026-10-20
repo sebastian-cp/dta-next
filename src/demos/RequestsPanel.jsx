@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
+import DemoBrief from '../components/DemoBrief.jsx'
 import Modal, { ModalActions } from '../components/Modal.jsx'
 import { Chip } from '../components/ProductWindow.jsx'
 import { ESTADOS, RESPONSABLES, SERVICIOS, REQUESTS, baseActivity, addMinutes } from '../data/requests.js'
@@ -105,10 +106,11 @@ function PanelApp({ onClose, onQuote }) {
       <div className="demo-banner">
         <Icon name="i-info" />
         <span>
-          <span className="bn-long">Demostración con datos ficticios. No es una aplicación real ni se conecta a ningún sistema: puedes filtrar, revisar y aprobar respuestas, y nada se envía.</span>
-          <span className="bn-short">Datos ficticios. Nada se envía ni se guarda.</span>
+          <span className="bn-long">Prototipo interactivo con datos ficticios y sin conexiones externas: puedes filtrar, asignar y aprobar respuestas, y nada se envía ni se guarda.</span>
+          <span className="bn-short">Prototipo con datos ficticios. Nada se envía.</span>
         </span>
       </div>
+      <DemoBrief id="panel" />
 
       <div className={`app${mobileView === 'detail' ? ' is-detail' : ''}`}>
         <nav className="app__side" aria-label="Menú de la demo">

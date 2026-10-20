@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Button from '../components/Button.jsx'
+import DemoBrief from '../components/DemoBrief.jsx'
 import Modal, { ModalActions } from '../components/Modal.jsx'
 import { Chip } from '../components/ProductWindow.jsx'
 import { FLOW_STEPS, SCENARIOS } from '../data/automation.js'
@@ -161,10 +162,11 @@ function AutomationApp({ onClose, onQuote }) {
       <div className="demo-banner">
         <Icon name="i-info" />
         <span>
-          <span className="bn-long">Simulación con correos de ejemplo ficticios. Los resultados están predefinidos: no se usa inteligencia artificial real ni se procesa información tuya.</span>
-          <span className="bn-short">Simulación con datos ficticios, sin IA real.</span>
+          <span className="bn-long">Prototipo interactivo con correos ficticios y sin conexiones externas. Los resultados están predefinidos para mostrar el flujo: no se procesa información tuya.</span>
+          <span className="bn-short">Prototipo con datos ficticios, sin conexiones.</span>
         </span>
       </div>
+      <DemoBrief id="automation" />
       <div className="seg seg--wide" role="group" aria-label="Elige un caso de ejemplo">
         {SCENARIOS.map((s) => (
           <button key={s.id} type="button" aria-pressed={s.id === id} onClick={() => setId(s.id)}>{s.label}</button>
