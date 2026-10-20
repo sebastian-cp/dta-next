@@ -48,7 +48,7 @@ export default function Header() {
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container">
         <a className="brand" href="#inicio" aria-label="DTA Next — Inicio">
-          <img src="/brand/dta-next-logo.png" width="224" height="48" alt="DTA Next — Inicio" />
+          <img src="/brand/dta-next-logo.webp" width="224" height="48" alt="DTA Next — Inicio" />
         </a>
         <nav className="nav" aria-label="Principal">
           {NAV.map((l) => <a key={l.href} href={l.href} aria-current={current(l.href)}>{l.label}</a>)}

@@ -13,7 +13,7 @@ function DemoCard({ id, title, label, caption, onOpen, badge = 'Demo', children 
       <div className="window demo-win" role="img" aria-label={label}>
         <span className="window__badge">{badge}</span>
         <div className="demo-win__head">
-          <strong><img src="/brand/dta-next-symbol.png" alt="" width="22" height="18" />{title}</strong>
+          <strong><img src="/brand/dta-next-symbol.webp" alt="" width="22" height="18" />{title}</strong>
         </div>
         {children}
       </div>

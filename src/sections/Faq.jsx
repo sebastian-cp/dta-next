@@ -6,7 +6,6 @@ import { FAQ_GROUPS, CONTACT } from '../data/content.js'
 
 export default function Faq({ onBook }) {
   const [active, setActive] = useState(FAQ_GROUPS[0].id)
-  const group = FAQ_GROUPS.find((g) => g.id === active)
   const wa = CONTACT.whatsapp && `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(CONTACT.whatsappText)}`
 
   // Flechas izquierda/derecha para moverse entre pestañas.
@@ -45,7 +44,7 @@ export default function Faq({ onBook }) {
                 type="button"
                 role="tab"
                 aria-selected={g.id === active}
-                aria-controls="faq-panel"
+                aria-controls={`faq-panel-${g.id}`}
                 tabIndex={g.id === active ? 0 : -1}
                 onClick={() => setActive(g.id)}
               >
@@ -53,9 +52,12 @@ export default function Faq({ onBook }) {
               </button>
             ))}
           </div>
-          <div id="faq-panel" role="tabpanel" aria-labelledby={`faq-tab-${active}`}>
-            <Accordion key={active} items={group.items} openFirst />
-          </div>
+          {/* Todas las preguntas quedan en el HTML para buscadores; solo se muestra la pestaña activa. */}
+          {FAQ_GROUPS.map((g) => (
+            <div key={g.id} id={`faq-panel-${g.id}`} role="tabpanel" aria-labelledby={`faq-tab-${g.id}`} hidden={g.id !== active}>
+              <Accordion items={g.items} openFirst />
+            </div>
+          ))}
         </div>
       </div>
     </section>
