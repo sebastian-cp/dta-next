@@ -21,7 +21,7 @@ export default function Hero({ onBook }) {
           </h1>
           <p className="lead">Sitios web, aplicaciones a medida e inteligencia artificial conectadas a las necesidades de tu empresa.</p>
           <div className="hero__actions">
-            <Button href="#agendar" onClick={(e) => { e.preventDefault(); onBook() }}><Icon name="i-calendar" />Agenda una reunión</Button>
+            <Button onClick={onBook}><Icon name="i-calendar" />Agenda una reunión</Button>
             <Button href="#demos" variant="secondary-dark">Explorar demos</Button>
           </div>
           <ul className="hero__points" aria-label="Lo que incluye cada proyecto">

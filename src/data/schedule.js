@@ -5,7 +5,7 @@ export const TIMEZONE = 'America/Santiago'
 export const SLOT_MINUTES = 30
 const START_HOUR = 8
 const END_HOUR = 18
-const BOOKING_DAYS = 10 // días hábiles que se ofrecen
+const BOOKING_DAYS = 20 // días hábiles que se ofrecen (unas cuatro semanas)
 const MIN_NOTICE_MINUTES = 120 // anticipación mínima para un horario del mismo día
 
 export const SLOTS = Array.from({ length: ((END_HOUR - START_HOUR) * 60) / SLOT_MINUTES }, (_, i) => {
@@ -55,4 +55,10 @@ export function isBookable(date, slot, now = new Date()) {
 /** "lunes 26 de octubre" */
 export function formatDay(date, opts = { weekday: 'long', day: 'numeric', month: 'long' }) {
   return new Intl.DateTimeFormat('es-CL', { ...opts, timeZone: 'UTC' }).format(toUTC(date))
+}
+
+/** Hora de término de un bloque: "09:30" → "10:00". */
+export function slotEnd(slot) {
+  const m = toMinutes(slot) + SLOT_MINUTES
+  return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`
 }
