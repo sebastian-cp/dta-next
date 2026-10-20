@@ -20,7 +20,7 @@ export default function Footer({ onOpenLegal, onService, onBook }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#inicio" aria-label="DTA Next — Inicio">
-              <img src="/brand/dta-next-logo.png" width="262" height="56" alt="DTA Next — Desarrollo, Tecnología y Automatización." loading="lazy" />
+              <img src="/brand/dta-next-logo.webp" width="262" height="56" alt="DTA Next — Desarrollo, Tecnología y Automatización." loading="lazy" />
             </a>
             <p>Consultoría tecnológica en Chile. Automatización con IA, sitios web y aplicaciones a medida para empresas.</p>
             <div className="footer-social">

@@ -36,7 +36,7 @@ export default function Hero({ onBook }) {
           <span className="window__badge">Demo ilustrativa</span>
           <div className="ops">
             <div className="ops__rail" aria-hidden="true">
-              <img src="/brand/dta-next-symbol.png" alt="" width="28" height="23" />
+              <img src="/brand/dta-next-symbol.webp" alt="" width="28" height="23" />
               <Icon name="i-home" className="on" />
               <Icon name="i-file" />
               <Icon name="i-check-circle" />

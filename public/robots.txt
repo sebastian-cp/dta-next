@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dta-next.vercel.app/sitemap.xml
