@@ -50,17 +50,13 @@ export const SERVICE_OPTIONS = [
   { value: 'orientacion', label: 'Necesito orientación' },
 ]
 
-// Canales de contacto directo.
-// PENDIENTE: reemplazar el correo por el corporativo cuando exista el dominio propio
-// y completar el número de WhatsApp Business (solo dígitos con código de país, ej. '56912345678').
-// Mientras `whatsapp` esté vacío, el botón de WhatsApp no se muestra.
+// Canales de contacto directo. `whatsapp`: solo dígitos con código de país; si se deja vacío, el botón no se muestra.
 export const CONTACT = {
   email: CONTACT_EMAIL,
-  whatsapp: '',
+  whatsapp: '56927640931',
   whatsappText: 'Hola, vengo desde el sitio de DTA Next y quiero hacer una consulta.',
   instagram: 'https://www.instagram.com/dta_next/',
-  // PENDIENTE: plazo de respuesta. Publicarlo solo si se puede cumplir (ej. 'dentro de 2 días hábiles').
-  responseTime: '',
+  responseTime: 'dentro de 1 a 2 días hábiles',
 }
 
 export const MEETING = {
