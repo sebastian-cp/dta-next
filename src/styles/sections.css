@@ -175,6 +175,7 @@
 .field .opt { font-weight: 400; color: var(--color-text-muted); }
 .field input, .field select, .field textarea { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--color-control-border); border-radius: var(--radius-sm); font: 400 1rem/1.4 var(--font-body); color: var(--brand-ink); background: #fff; transition: border-color var(--duration-fast), box-shadow var(--duration-fast); }
 .field textarea { min-height: 144px; resize: vertical; }
+.field select { appearance: none; -webkit-appearance: none; padding-right: 44px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310161B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 18px 18px; cursor: pointer; }
 .field input::placeholder, .field textarea::placeholder { color: #6B7A85; }
 .field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 1px; }
 .field [aria-invalid="true"] { border-color: var(--color-error); border-width: 2px; }
@@ -225,9 +226,7 @@
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* Enlaces legales (botones con aspecto de enlace) */
-.footer-nav button, .inline-link { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
-.footer-nav button { font-weight: 500; font-size: .9375rem; min-height: 44px; display: inline-flex; align-items: center; }
-.footer-nav button:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 4px; }
+.inline-link { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
 .inline-link { color: var(--brand-blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .form-legal { font-size: .875rem; color: var(--color-text-muted); margin-top: 16px; }
 
