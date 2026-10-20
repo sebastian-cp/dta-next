@@ -48,7 +48,7 @@ export default function App() {
         <Faq />
         <Contact service={contactService} onServiceChange={setContactService} onOpenLegal={setLegalDoc} onBook={goBook} />
       </main>
-      <Footer onOpenLegal={setLegalDoc} />
+      <Footer onOpenLegal={setLegalDoc} onService={setServiceModal} onBook={goBook} />
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} onOpenLegal={setLegalDoc} />
       <LegalModal doc={legalDoc} onClose={() => setLegalDoc(null)} />
       <Analytics />

@@ -188,13 +188,28 @@
 /* ============================================================
    FOOTER
    ============================================================ */
-.site-footer { background: #fff; padding-block: 40px; border-top: 1px solid var(--color-border); }
-.site-footer .container { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; justify-content: space-between; }
-.site-footer img { height: 56px; width: auto; }
-.footer-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
-.footer-nav a { text-decoration: none; font-weight: 500; font-size: .9375rem; min-height: 44px; display: inline-flex; align-items: center; }
-.footer-nav a:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 4px; }
-.footer-copy { font-size: .875rem; color: var(--color-text-muted); }
+.site-footer { background: var(--brand-mist); border-top: 1px solid var(--color-border); padding-block: 56px 24px; }
+.footer-grid { display: grid; gap: 40px 32px; }
+@media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 48px; } }
+.footer-brand img { height: 52px; width: auto; }
+.footer-brand p { margin-top: 16px; color: var(--color-text-muted); font-size: .9375rem; max-width: 34ch; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-col h2 { font: 700 .8125rem/1.4 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--brand-blue); margin-bottom: 12px; }
+.footer-col ul { display: grid; gap: 2px; }
+.footer-col a, .footer-col li > button { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; font-size: .9375rem; font-weight: 500; color: var(--brand-ink); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.footer-col a:hover, .footer-col li > button:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 4px; }
+.footer-contact li { display: flex; align-items: flex-start; gap: 10px; min-height: 40px; padding-block: 8px; font-size: .9375rem; }
+.footer-contact li a { min-height: 0; overflow-wrap: anywhere; }
+.footer-contact li .icon { width: 18px; height: 18px; color: var(--brand-blue); margin-top: 3px; }
+.footer-contact small { display: block; color: var(--color-text-muted); font-size: .8125rem; }
+.footer-book { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 44px; padding: 8px 18px; border: 1px solid var(--brand-blue); border-radius: var(--radius-md); background: #fff; color: var(--brand-blue); font: 600 .9375rem/1 var(--font-body); cursor: pointer; transition: background-color var(--duration-fast); }
+.footer-book:hover { background: rgb(36 87 255 / 8%); }
+.footer-book .icon { width: 18px; height: 18px; }
+.footer-bottom { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--color-border); font-size: .875rem; color: var(--color-text-muted); }
+.footer-legal { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.footer-legal button { background: none; border: 0; padding: 0; min-height: 40px; font: inherit; color: inherit; cursor: pointer; }
+.footer-legal button:hover { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 4px; }
 
 /* Demos con imagen */
 .shot { border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--brand-mist); }
@@ -217,8 +232,7 @@
 .form-legal { font-size: .875rem; color: var(--color-text-muted); margin-top: 16px; }
 
 /* Red social */
-.footer-end { display: flex; align-items: center; gap: 16px; }
-.social-link { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--brand-ink); text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast), background-color var(--duration-fast); }
+.social-link { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--brand-ink); background: #fff; text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast), background-color var(--duration-fast); }
 .social-link:hover { color: var(--brand-blue); border-color: var(--brand-blue); background: rgb(36 87 255 / 6%); }
 
 /* ---------- Mejoras de presentación del hero y del header ---------- */

@@ -3,7 +3,7 @@ import { FAQ } from '../data/content.js'
 
 export default function Faq() {
   return (
-    <section className="section--mist" aria-labelledby="faq-title">
+    <section className="section--mist" id="preguntas" aria-labelledby="faq-title">
       <div className="container">
         <div className="section-head">
           <p className="eyebrow">Preguntas frecuentes</p>
